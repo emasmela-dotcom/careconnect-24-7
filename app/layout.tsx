@@ -42,7 +42,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <FavoritesProvider>
           <Navigation />
-          <main className="min-h-screen bg-white">
+          <main className="min-h-screen bg-gray-50">
             <div className="py-8">
               {children}
             </div>

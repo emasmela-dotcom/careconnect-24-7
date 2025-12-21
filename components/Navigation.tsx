@@ -30,7 +30,8 @@ export default function Navigation() {
     <nav className="bg-white shadow-md border-b-2 border-gray-300">
       <div className="container mx-auto px-6">
         <div className="flex items-center justify-between h-20">
-          <div className="flex items-center">
+          <div className="flex items-center gap-3">
+            <Heart className="text-blue-700" size={32} />
             <Link href="/" className="text-3xl font-bold text-black hover:no-underline">
               CareConnect 24/7
             </Link>

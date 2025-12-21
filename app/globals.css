@@ -10,7 +10,7 @@
   
   body {
     color: #000000; /* High contrast: black text on white */
-    background: #ffffff;
+    background: #fafafa; /* Very light warm gray for subtle warmth */
     font-size: 1.125rem; /* 18px base, 20px with rem scaling */
     line-height: 1.7; /* Increased line height for readability */
     -webkit-font-smoothing: antialiased;
