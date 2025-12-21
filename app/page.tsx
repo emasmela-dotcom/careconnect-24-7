@@ -1,7 +1,11 @@
+'use client'
+
 import Link from 'next/link'
-import { Users, Calendar, FileText, Activity, Heart, Shield, Share2, Smartphone, Pill, Activity as ActivityIcon, ClipboardList } from 'lucide-react'
+import { Users, Calendar, FileText, Activity, Heart, Shield, Share2, Smartphone, Pill, Activity as ActivityIcon, ClipboardList, Star } from 'lucide-react'
+import { useFavorites } from '@/components/FavoritesContext'
 
 export default function Home() {
+  const { favorites, toggleFavorite, isFavorite } = useFavorites()
   const features = [
     {
       icon: Users,
@@ -109,26 +113,94 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Features Grid - Larger cards with more spacing */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
-        {features.map((feature) => {
-          const Icon = feature.icon
-          return (
-            <Link
-              key={feature.title}
-              href={feature.href}
-              className="bg-white border-2 border-gray-300 p-8 hover:border-blue-700 hover:shadow-md block min-h-[200px]"
-            >
-              <div className="w-16 h-16 border-2 border-gray-400 flex items-center justify-center mb-6 bg-gray-50">
-                <Icon className="text-gray-800" size={28} />
+      {/* Favorites Section - Show if user has favorites */}
+      {favorites.length > 0 && (
+        <div className="mb-16">
+          <h2 className="text-3xl font-semibold text-black mb-8">Your Favorites</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+            {features
+              .filter(feature => favorites.includes(feature.href))
+              .map((feature) => {
+                const Icon = feature.icon
+                return (
+                  <div key={feature.title} className="relative">
+                    <Link
+                      href={feature.href}
+                      className="bg-white border-2 border-blue-700 p-8 hover:shadow-md block min-h-[200px]"
+                    >
+                      <div className="w-16 h-16 border-2 border-blue-700 flex items-center justify-center mb-6 bg-blue-50">
+                        <Icon className="text-blue-800" size={28} />
+                      </div>
+                      <h3 className="text-2xl font-semibold text-black mb-4">
+                        {feature.title}
+                      </h3>
+                      <p className="text-lg text-gray-800 leading-relaxed">{feature.description}</p>
+                    </Link>
+                    <button
+                      onClick={(e) => {
+                        e.preventDefault()
+                        e.stopPropagation()
+                        toggleFavorite(feature.href)
+                      }}
+                      className="absolute top-4 right-4 p-2 bg-blue-700 text-white rounded-full hover:bg-blue-800 min-w-[3rem] min-h-[3rem] flex items-center justify-center"
+                      aria-label="Remove from favorites"
+                    >
+                      <Star size={24} className="fill-white" />
+                    </button>
+                  </div>
+                )
+              })}
+          </div>
+        </div>
+      )}
+
+      {/* All Features Grid - Larger cards with more spacing */}
+      <div className="mb-16">
+        <h2 className="text-3xl font-semibold text-black mb-8">All Features</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {features.map((feature) => {
+            const Icon = feature.icon
+            const favorite = isFavorite(feature.href)
+            return (
+              <div key={feature.title} className="relative">
+                <Link
+                  href={feature.href}
+                  className={`bg-white border-2 p-8 hover:shadow-md block min-h-[200px] ${
+                    favorite ? 'border-blue-700' : 'border-gray-300 hover:border-blue-700'
+                  }`}
+                >
+                  <div className={`w-16 h-16 border-2 flex items-center justify-center mb-6 ${
+                    favorite ? 'border-blue-700 bg-blue-50' : 'border-gray-400 bg-gray-50'
+                  }`}>
+                    <Icon className={favorite ? 'text-blue-800' : 'text-gray-800'} size={28} />
+                  </div>
+                  <h3 className="text-2xl font-semibold text-black mb-4">
+                    {feature.title}
+                  </h3>
+                  <p className="text-lg text-gray-800 leading-relaxed">{feature.description}</p>
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault()
+                  }}
+                  onMouseDown={(e) => {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    toggleFavorite(feature.href)
+                  }}
+                  className={`absolute top-4 right-4 p-2 rounded-full min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 ${
+                    favorite
+                      ? 'bg-blue-700 text-white border-blue-800 hover:bg-blue-800'
+                      : 'bg-white text-gray-600 border-gray-400 hover:bg-gray-100 hover:border-blue-700'
+                  }`}
+                  aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
+                >
+                  <Star size={24} className={favorite ? 'fill-white' : ''} />
+                </button>
               </div>
-              <h3 className="text-2xl font-semibold text-black mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-lg text-gray-800 leading-relaxed">{feature.description}</p>
-            </Link>
-          )
-        })}
+            )
+          })}
+        </div>
       </div>
 
       {/* Quick Actions - Large buttons */}

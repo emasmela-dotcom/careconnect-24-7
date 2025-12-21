@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Users, Calendar, FileText, Activity, Heart, Shield, Menu, X, Share2, Pill, Activity as ActivityIcon, ClipboardList } from 'lucide-react'
+import { Home, Users, Calendar, FileText, Activity, Heart, Shield, Menu, X, Share2, Pill, Activity as ActivityIcon, ClipboardList, Star } from 'lucide-react'
 import { clsx } from 'clsx'
+import { useFavorites } from './FavoritesContext'
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
@@ -23,6 +24,7 @@ const navigation = [
 export default function Navigation() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { favorites } = useFavorites()
 
   return (
     <nav className="bg-white shadow-md border-b-2 border-gray-300">
@@ -36,15 +38,30 @@ export default function Navigation() {
           
           {/* Desktop Navigation */}
           <div className="hidden lg:flex space-x-2">
+            {favorites.length > 0 && (
+              <Link
+                href="/#favorites"
+                className={clsx(
+                  'flex items-center px-6 py-3 text-lg font-semibold border-b-4 min-h-[3.5rem]',
+                  pathname === '/' && window.location.hash === '#favorites'
+                    ? 'border-blue-700 text-black bg-blue-50'
+                    : 'border-transparent text-gray-800 hover:bg-gray-100 hover:text-black'
+                )}
+              >
+                <Star size={22} className="mr-3 fill-yellow-400 text-yellow-400" />
+                Favorites
+              </Link>
+            )}
             {navigation.map((item) => {
               const Icon = item.icon
               const isActive = pathname === item.href
+              const isFav = favorites.includes(item.href)
               return (
                 <Link
                   key={item.name}
                   href={item.href}
                   className={clsx(
-                    'flex items-center px-6 py-3 text-lg font-semibold border-b-4 min-h-[3.5rem]',
+                    'flex items-center px-6 py-3 text-lg font-semibold border-b-4 min-h-[3.5rem] relative',
                     isActive
                       ? 'border-blue-700 text-black bg-blue-50'
                       : 'border-transparent text-gray-800 hover:bg-gray-100 hover:text-black'
@@ -52,6 +69,9 @@ export default function Navigation() {
                 >
                   <Icon size={22} className="mr-3" />
                   {item.name}
+                  {isFav && (
+                    <Star size={16} className="ml-2 fill-yellow-400 text-yellow-400" />
+                  )}
                 </Link>
               )
             })}

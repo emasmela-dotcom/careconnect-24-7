@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
+import { FavoritesProvider } from '@/components/FavoritesContext'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -39,12 +40,14 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/icon-192.png" />
       </head>
       <body className={inter.className}>
-        <Navigation />
-        <main className="min-h-screen bg-white">
-          <div className="py-8">
-            {children}
-          </div>
-        </main>
+        <FavoritesProvider>
+          <Navigation />
+          <main className="min-h-screen bg-white">
+            <div className="py-8">
+              {children}
+            </div>
+          </main>
+        </FavoritesProvider>
       </body>
     </html>
   )
