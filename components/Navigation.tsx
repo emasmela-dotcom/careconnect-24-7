@@ -40,16 +40,11 @@ export default function Navigation() {
           <div className="hidden lg:flex space-x-2">
             {favorites.length > 0 && (
               <Link
-                href="/#favorites"
-                className={clsx(
-                  'flex items-center px-6 py-3 text-lg font-semibold border-b-4 min-h-[3.5rem]',
-                  pathname === '/' && window.location.hash === '#favorites'
-                    ? 'border-blue-700 text-black bg-blue-50'
-                    : 'border-transparent text-gray-800 hover:bg-gray-100 hover:text-black'
-                )}
+                href="/"
+                className="flex items-center px-6 py-3 text-lg font-semibold border-b-4 min-h-[3.5rem] border-transparent text-gray-800 hover:bg-gray-100 hover:text-black"
               >
                 <Star size={22} className="mr-3 fill-yellow-400 text-yellow-400" />
-                Favorites
+                Favorites ({favorites.length})
               </Link>
             )}
             {navigation.map((item) => {
@@ -91,9 +86,20 @@ export default function Navigation() {
         {mobileMenuOpen && (
           <div className="lg:hidden border-t-2 border-gray-300 py-6">
             <div className="flex flex-col space-y-2">
+              {favorites.length > 0 && (
+                <Link
+                  href="/"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex items-center px-6 py-4 rounded-lg text-lg font-semibold min-h-[3.5rem] border-2 border-transparent text-gray-800 hover:bg-gray-100 hover:text-black"
+                >
+                  <Star size={24} className="mr-4 fill-yellow-400 text-yellow-400" />
+                  Favorites ({favorites.length})
+                </Link>
+              )}
               {navigation.map((item) => {
                 const Icon = item.icon
                 const isActive = pathname === item.href
+                const isFav = favorites.includes(item.href)
                 return (
                   <Link
                     key={item.name}
@@ -108,6 +114,9 @@ export default function Navigation() {
                   >
                     <Icon size={24} className="mr-4" />
                     {item.name}
+                    {isFav && (
+                      <Star size={18} className="ml-2 fill-yellow-400 text-yellow-400" />
+                    )}
                   </Link>
                 )
               })}
