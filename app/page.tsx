@@ -78,84 +78,84 @@ export default function Home() {
   ]
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      {/* Hero Section */}
-      <div className="text-center mb-12">
-        <h1 className="text-5xl font-bold text-gray-900 mb-4">
+    <div className="container mx-auto px-6 py-12 max-w-7xl">
+      {/* Hero Section - Large spacing and text */}
+      <div className="text-center mb-16">
+        <h1 className="text-5xl font-bold text-black mb-6">
           CareConnect 24/7
         </h1>
-        <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+        <p className="text-2xl text-gray-800 max-w-3xl mx-auto leading-relaxed">
           Comprehensive 24/7 care management platform for elderly and senior care.
         </p>
       </div>
 
-      {/* Stats Section */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        <div className="bg-white border border-gray-200 p-6 text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-2">0</div>
-          <div className="text-gray-600">Active Residents</div>
+      {/* Stats Section - Larger cards with more spacing */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
+        <div className="bg-white border-2 border-gray-300 p-8 text-center shadow-sm">
+          <div className="text-4xl font-bold text-black mb-4">0</div>
+          <div className="text-lg text-gray-800 font-medium">Active Residents</div>
         </div>
-        <div className="bg-white border border-gray-200 p-6 text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-2">0</div>
-          <div className="text-gray-600">Caregivers</div>
+        <div className="bg-white border-2 border-gray-300 p-8 text-center shadow-sm">
+          <div className="text-4xl font-bold text-black mb-4">0</div>
+          <div className="text-lg text-gray-800 font-medium">Caregivers</div>
         </div>
-        <div className="bg-white border border-gray-200 p-6 text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-2">0</div>
-          <div className="text-gray-600">Today&apos;s Appointments</div>
+        <div className="bg-white border-2 border-gray-300 p-8 text-center shadow-sm">
+          <div className="text-4xl font-bold text-black mb-4">0</div>
+          <div className="text-lg text-gray-800 font-medium">Today&apos;s Appointments</div>
         </div>
-        <div className="bg-white border border-gray-200 p-6 text-center">
-          <div className="text-3xl font-bold text-gray-900 mb-2">0</div>
-          <div className="text-gray-600">Pending Tasks</div>
+        <div className="bg-white border-2 border-gray-300 p-8 text-center shadow-sm">
+          <div className="text-4xl font-bold text-black mb-4">0</div>
+          <div className="text-lg text-gray-800 font-medium">Pending Tasks</div>
         </div>
       </div>
 
-      {/* Features Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {/* Features Grid - Larger cards with more spacing */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
         {features.map((feature) => {
           const Icon = feature.icon
           return (
             <Link
               key={feature.title}
               href={feature.href}
-              className="bg-white border border-gray-200 p-6 hover:border-blue-600 transition-colors"
+              className="bg-white border-2 border-gray-300 p-8 hover:border-blue-700 hover:shadow-md block min-h-[200px]"
             >
-              <div className="w-12 h-12 border border-gray-300 flex items-center justify-center mb-4">
-                <Icon className="text-gray-700" size={24} />
+              <div className="w-16 h-16 border-2 border-gray-400 flex items-center justify-center mb-6 bg-gray-50">
+                <Icon className="text-gray-800" size={28} />
               </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+              <h3 className="text-2xl font-semibold text-black mb-4">
                 {feature.title}
               </h3>
-              <p className="text-gray-600">{feature.description}</p>
+              <p className="text-lg text-gray-800 leading-relaxed">{feature.description}</p>
             </Link>
           )
         })}
       </div>
 
-      {/* Quick Actions */}
-      <div className="mt-12 bg-white border border-gray-200 p-6">
-        <h2 className="text-2xl font-semibold text-gray-900 mb-4">Quick Actions</h2>
-        <div className="flex flex-wrap gap-4">
+      {/* Quick Actions - Large buttons */}
+      <div className="mt-16 bg-white border-2 border-gray-300 p-10 shadow-sm">
+        <h2 className="text-3xl font-semibold text-black mb-8">Quick Actions</h2>
+        <div className="flex flex-wrap gap-6">
           <Link
             href="/caregiver-mobile"
-            className="px-4 py-2 bg-blue-600 text-white border border-blue-700 hover:bg-blue-700 transition-colors"
+            className="px-8 py-4 bg-blue-700 text-white text-lg font-semibold border-2 border-blue-800 hover:bg-blue-800 min-h-[3.5rem] inline-flex items-center justify-center"
           >
             Mobile Caregiver View
           </Link>
           <Link
             href="/family"
-            className="px-4 py-2 bg-blue-600 text-white border border-blue-700 hover:bg-blue-700 transition-colors"
+            className="px-8 py-4 bg-blue-700 text-white text-lg font-semibold border-2 border-blue-800 hover:bg-blue-800 min-h-[3.5rem] inline-flex items-center justify-center"
           >
             Family Sharing
           </Link>
           <Link
             href="/residents/new"
-            className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+            className="px-8 py-4 border-2 border-gray-400 text-black text-lg font-semibold hover:bg-gray-100 min-h-[3.5rem] inline-flex items-center justify-center"
           >
             Add New Resident
           </Link>
           <Link
             href="/schedules/new"
-            className="px-4 py-2 border border-gray-300 text-gray-700 hover:bg-gray-50 transition-colors"
+            className="px-8 py-4 border-2 border-gray-400 text-black text-lg font-semibold hover:bg-gray-100 min-h-[3.5rem] inline-flex items-center justify-center"
           >
             Create Schedule
           </Link>

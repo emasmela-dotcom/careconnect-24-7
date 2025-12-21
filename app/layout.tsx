@@ -40,8 +40,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <Navigation />
-        <main className="min-h-screen bg-gray-50">
-          {children}
+        <main className="min-h-screen bg-white">
+          <div className="py-8">
+            {children}
+          </div>
         </main>
       </body>
     </html>
