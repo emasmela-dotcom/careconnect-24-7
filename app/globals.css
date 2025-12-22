@@ -2,78 +2,83 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Senior-Friendly Design: Ages 50-100 */
+/* Optimized for Users Aged 55-80: Clarity, Comfort, Trust */
 @layer base {
   html {
-    font-size: 18px; /* Base font size for better readability */
+    font-size: 20px; /* Increased base font size for better readability */
   }
   
   body {
-    color: #000000; /* High contrast: black text on white */
-    background: #fafafa; /* Very light warm gray for subtle warmth */
-    font-size: 1.125rem; /* 18px base, 20px with rem scaling */
-    line-height: 1.7; /* Increased line height for readability */
+    color: #000000; /* Maximum contrast: pure black text */
+    background: #ffffff; /* Pure white background for maximum contrast */
+    font-size: 1.25rem; /* 20px base body text */
+    line-height: 1.8; /* Increased line height for comfortable reading */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Large, readable headings */
+  /* Large, readable headings with strong hierarchy */
   h1 {
-    font-size: 2.5rem; /* 45px */
+    font-size: 3rem; /* 60px - very large for clarity */
+    font-weight: 700;
+    line-height: 1.2;
+    color: #000000;
+    margin-bottom: 2rem;
+    letter-spacing: -0.02em;
+  }
+  
+  h2 {
+    font-size: 2.25rem; /* 45px */
     font-weight: 700;
     line-height: 1.3;
     color: #000000;
     margin-bottom: 1.5rem;
   }
   
-  h2 {
-    font-size: 2rem; /* 36px */
-    font-weight: 700;
-    line-height: 1.3;
+  h3 {
+    font-size: 1.75rem; /* 35px */
+    font-weight: 600;
+    line-height: 1.4;
     color: #000000;
     margin-bottom: 1.25rem;
   }
   
-  h3 {
-    font-size: 1.5rem; /* 27px */
-    font-weight: 600;
-    line-height: 1.4;
-    color: #000000;
-    margin-bottom: 1rem;
-  }
-  
-  /* Large body text */
+  /* Large body text - minimum 20px */
   p {
-    font-size: 1.125rem; /* 18px */
-    line-height: 1.7;
-    color: #1a1a1a;
-    margin-bottom: 1rem;
+    font-size: 1.25rem; /* 20px */
+    line-height: 1.8;
+    color: #000000; /* Pure black for maximum contrast */
+    margin-bottom: 1.25rem;
   }
   
-  /* Large, accessible links */
+  /* Large, accessible links with clear visibility */
   a {
-    font-size: 1.125rem; /* 18px */
-    color: #0284c7; /* High contrast blue */
+    font-size: 1.25rem; /* 20px */
+    color: #0056b3; /* Strong blue for high contrast */
     text-decoration: underline;
-    text-underline-offset: 0.25rem;
+    text-underline-offset: 0.3rem;
+    font-weight: 500;
   }
   
   a:hover {
-    color: #0369a1; /* Darker blue on hover */
+    color: #003d82; /* Darker blue on hover */
+    text-decoration-thickness: 2px;
   }
   
-  /* Large buttons - minimum 44x44px touch target */
+  /* Large, obvious buttons - minimum 56x56px touch target */
   button {
-    font-size: 1.125rem; /* 18px */
-    min-height: 3rem; /* 48px */
-    min-width: 3rem; /* 48px */
-    padding: 0.875rem 1.5rem; /* Generous padding */
+    font-size: 1.25rem; /* 20px */
+    min-height: 3.5rem; /* 56px minimum */
+    min-width: 3.5rem; /* 56px minimum */
+    padding: 1rem 2rem; /* Generous padding */
+    font-weight: 600;
+    border-width: 3px; /* Thicker borders for visibility */
   }
   
-  /* Remove animations for accessibility */
+  /* Minimal, gentle transitions only */
   * {
     animation-duration: 0s !important;
-    transition-duration: 0.2s !important; /* Slow, gentle transitions only */
+    transition-duration: 0.15s !important; /* Very quick, no distractions */
   }
 }
 
@@ -82,23 +87,32 @@
     text-wrap: balance;
   }
   
-  /* Senior-friendly button styles */
+  /* Large, obvious button styles for 55-80 age group */
   .btn-large {
-    font-size: 1.25rem; /* 20px */
-    padding: 1rem 2rem; /* Large clickable area */
-    min-height: 3.5rem; /* 56px */
-    font-weight: 600;
-    border-width: 2px; /* Clear borders */
+    font-size: 1.375rem; /* 22px */
+    padding: 1.25rem 2.5rem; /* Extra large clickable area */
+    min-height: 4rem; /* 64px - well above minimum */
+    min-width: 4rem;
+    font-weight: 700;
+    border-width: 3px; /* Thick, visible borders */
+    letter-spacing: 0.02em;
   }
   
-  /* High contrast text */
+  /* Maximum contrast text */
   .text-high-contrast {
     color: #000000;
+    font-weight: 500;
   }
   
-  /* Generous spacing */
+  /* Extra generous spacing for clarity */
   .spacing-large {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+  }
+  
+  /* Clear section dividers */
+  .section-divider {
+    border-top: 3px solid #000000;
+    margin: 3rem 0;
   }
 }
 

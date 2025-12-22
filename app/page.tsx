@@ -82,56 +82,54 @@ export default function Home() {
   ]
 
   return (
-    <div className="container mx-auto px-6 py-12 max-w-7xl">
-      {/* Hero Section - Large spacing and text with personality */}
-      <div className="text-center mb-16">
-        <div className="mb-6">
-          <h1 className="text-5xl font-bold text-black mb-4">
-            Welcome to CareConnect 24/7
+    <div className="container mx-auto px-8 py-16 max-w-6xl">
+      {/* Hero Section - Extra large spacing and clear text */}
+      <div className="text-center mb-20">
+        <h1 className="text-5xl font-bold text-black mb-6">
+          Welcome to CareConnect 24/7
         </h1>
-          <div className="w-24 h-1 bg-blue-700 mx-auto mb-6"></div>
-        </div>
-        <p className="text-2xl text-gray-800 max-w-3xl mx-auto leading-relaxed mb-4">
+        <div className="w-32 h-2 bg-blue-700 mx-auto mb-8"></div>
+        <p className="text-2xl text-black max-w-3xl mx-auto leading-relaxed mb-6 font-medium">
           Your trusted partner in providing compassionate, around-the-clock care.
         </p>
-        <p className="text-xl text-gray-700 max-w-2xl mx-auto leading-relaxed">
+        <p className="text-xl text-black max-w-2xl mx-auto leading-relaxed">
           We&apos;re here to make care management simple, organized, and stress-free for you and your loved ones.
         </p>
       </div>
 
-      {/* Stats Section - Larger cards with more spacing and personality */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-        <div className="bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 p-8 text-center shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-4xl font-bold text-blue-700 mb-4">0</div>
-          <div className="text-lg text-gray-800 font-medium">Active Residents</div>
-          <div className="text-sm text-gray-600 mt-2">People we&apos;re caring for</div>
+      {/* Stats Section - Simple, clear cards with strong borders */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
+        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
+          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
+          <div className="text-xl text-black font-semibold mb-2">Active Residents</div>
+          <div className="text-lg text-black">People we&apos;re caring for</div>
         </div>
-        <div className="bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 p-8 text-center shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-4xl font-bold text-blue-700 mb-4">0</div>
-          <div className="text-lg text-gray-800 font-medium">Caregivers</div>
-          <div className="text-sm text-gray-600 mt-2">Dedicated team members</div>
+        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
+          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
+          <div className="text-xl text-black font-semibold mb-2">Caregivers</div>
+          <div className="text-lg text-black">Dedicated team members</div>
         </div>
-        <div className="bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 p-8 text-center shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-4xl font-bold text-blue-700 mb-4">0</div>
-          <div className="text-lg text-gray-800 font-medium">Today&apos;s Appointments</div>
-          <div className="text-sm text-gray-600 mt-2">Scheduled for today</div>
+        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
+          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
+          <div className="text-xl text-black font-semibold mb-2">Today&apos;s Appointments</div>
+          <div className="text-lg text-black">Scheduled for today</div>
         </div>
-        <div className="bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 p-8 text-center shadow-sm hover:shadow-md transition-shadow">
-          <div className="text-4xl font-bold text-blue-700 mb-4">0</div>
-          <div className="text-lg text-gray-800 font-medium">Pending Tasks</div>
-          <div className="text-sm text-gray-600 mt-2">Items to complete</div>
+        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
+          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
+          <div className="text-xl text-black font-semibold mb-2">Pending Tasks</div>
+          <div className="text-lg text-black">Items to complete</div>
         </div>
       </div>
 
       {/* Favorites Section - Show if user has favorites */}
       {favorites.length > 0 && (
-        <div className="mb-16">
-          <div className="flex items-center gap-3 mb-8">
-            <Star className="fill-yellow-400 text-yellow-400" size={32} />
-            <h2 className="text-3xl font-semibold text-black">Your Favorite Features</h2>
+        <div className="mb-20">
+          <div className="flex items-center gap-4 mb-6">
+            <Star className="fill-yellow-500 text-yellow-500" size={40} />
+            <h2 className="text-3xl font-bold text-black">Your Favorite Features</h2>
           </div>
-          <p className="text-lg text-gray-700 mb-6">Quick access to the tools you use most often</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
+          <p className="text-xl text-black mb-8 font-medium">Quick access to the tools you use most often</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
             {features
               .filter(feature => favorites.includes(feature.href))
               .map((feature) => {
@@ -140,15 +138,15 @@ export default function Home() {
                   <div key={feature.title} className="relative">
                     <Link
                       href={feature.href}
-                      className="bg-white border-2 border-blue-700 p-8 hover:shadow-md block min-h-[200px]"
+                      className="bg-white border-4 border-blue-700 p-10 shadow-lg block min-h-[240px] hover:shadow-xl"
                     >
-                      <div className="w-16 h-16 border-2 border-blue-700 flex items-center justify-center mb-6 bg-blue-50">
-                        <Icon className="text-blue-800" size={28} />
+                      <div className="w-20 h-20 border-4 border-blue-700 flex items-center justify-center mb-8 bg-blue-100">
+                        <Icon className="text-blue-800" size={36} />
                       </div>
-                      <h3 className="text-2xl font-semibold text-black mb-4">
+                      <h3 className="text-2xl font-bold text-black mb-6">
                         {feature.title}
                       </h3>
-                      <p className="text-lg text-gray-800 leading-relaxed">{feature.description}</p>
+                      <p className="text-xl text-black leading-relaxed">{feature.description}</p>
                     </Link>
                     <button
                       onClick={(e) => {
@@ -156,10 +154,10 @@ export default function Home() {
                         e.stopPropagation()
                         toggleFavorite(feature.href)
                       }}
-                      className="absolute top-4 right-4 p-2 bg-blue-700 text-white rounded-full hover:bg-blue-800 min-w-[3rem] min-h-[3rem] flex items-center justify-center"
+                      className="absolute top-6 right-6 p-3 bg-blue-700 text-white rounded-full hover:bg-blue-800 min-w-[4rem] min-h-[4rem] flex items-center justify-center border-4 border-blue-800 shadow-lg"
                       aria-label="Remove from favorites"
                     >
-                      <Star size={24} className="fill-white" />
+                      <Star size={28} className="fill-white" />
                     </button>
                   </div>
                 )
@@ -168,11 +166,11 @@ export default function Home() {
         </div>
       )}
 
-      {/* All Features Grid - Larger cards with more spacing */}
-      <div className="mb-16">
-        <h2 className="text-3xl font-semibold text-black mb-4">Everything You Need, Right Here</h2>
-        <p className="text-lg text-gray-700 mb-8">Explore all our care management tools. Click the star to save your favorites for quick access.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* All Features Grid - Simple, clear cards */}
+      <div className="mb-20">
+        <h2 className="text-3xl font-bold text-black mb-6">Everything You Need, Right Here</h2>
+        <p className="text-xl text-black mb-10 font-medium">Explore all our care management tools. Click the star to save your favorites for quick access.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {features.map((feature) => {
           const Icon = feature.icon
             const favorite = isFavorite(feature.href)
@@ -180,19 +178,19 @@ export default function Home() {
               <div key={feature.title} className="relative">
             <Link
               href={feature.href}
-                  className={`bg-white border-2 p-8 hover:shadow-md block min-h-[200px] ${
-                    favorite ? 'border-blue-700' : 'border-gray-300 hover:border-blue-700'
+                  className={`bg-white border-4 p-10 shadow-lg block min-h-[240px] hover:shadow-xl ${
+                    favorite ? 'border-blue-700' : 'border-gray-400 hover:border-blue-700'
                   }`}
                 >
-                  <div className={`w-16 h-16 border-2 flex items-center justify-center mb-6 ${
-                    favorite ? 'border-blue-700 bg-blue-50' : 'border-gray-400 bg-gray-50'
+                  <div className={`w-20 h-20 border-4 flex items-center justify-center mb-8 ${
+                    favorite ? 'border-blue-700 bg-blue-100' : 'border-gray-500 bg-gray-100'
                   }`}>
-                    <Icon className={favorite ? 'text-blue-800' : 'text-gray-800'} size={28} />
+                    <Icon className={favorite ? 'text-blue-800' : 'text-black'} size={36} />
               </div>
-              <h3 className="text-2xl font-semibold text-black mb-4">
+              <h3 className="text-2xl font-bold text-black mb-6">
                 {feature.title}
               </h3>
-              <p className="text-lg text-gray-800 leading-relaxed">{feature.description}</p>
+              <p className="text-xl text-black leading-relaxed">{feature.description}</p>
             </Link>
                 <button
                   onClick={(e) => {
@@ -203,14 +201,14 @@ export default function Home() {
                     e.stopPropagation()
                     toggleFavorite(feature.href)
                   }}
-                  className={`absolute top-4 right-4 p-2 rounded-full min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 ${
+                  className={`absolute top-6 right-6 p-3 rounded-full min-w-[4rem] min-h-[4rem] flex items-center justify-center border-4 shadow-lg ${
                     favorite
                       ? 'bg-blue-700 text-white border-blue-800 hover:bg-blue-800'
-                      : 'bg-white text-gray-600 border-gray-400 hover:bg-gray-100 hover:border-blue-700'
+                      : 'bg-white text-black border-gray-500 hover:bg-gray-100 hover:border-blue-700'
                   }`}
                   aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
                 >
-                  <Star size={24} className={favorite ? 'fill-white' : ''} />
+                  <Star size={28} className={favorite ? 'fill-white' : 'fill-gray-400'} />
                 </button>
               </div>
             )
@@ -218,32 +216,32 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Quick Actions - Large buttons */}
-      <div className="mt-16 bg-gradient-to-br from-blue-50 to-white border-2 border-blue-200 p-10 shadow-sm">
-        <h2 className="text-3xl font-semibold text-black mb-4">Get Started Quickly</h2>
-        <p className="text-lg text-gray-700 mb-8">Common tasks to help you get things done faster</p>
+      {/* Quick Actions - Extra large, obvious buttons */}
+      <div className="mt-20 bg-white border-4 border-blue-700 p-12 shadow-lg">
+        <h2 className="text-3xl font-bold text-black mb-6">Get Started Quickly</h2>
+        <p className="text-xl text-black mb-10 font-medium">Common tasks to help you get things done faster</p>
         <div className="flex flex-wrap gap-6">
           <Link
             href="/caregiver-mobile"
-            className="px-8 py-4 bg-blue-700 text-white text-lg font-semibold border-2 border-blue-800 hover:bg-blue-800 min-h-[3.5rem] inline-flex items-center justify-center"
+            className="px-10 py-5 bg-blue-700 text-white text-xl font-bold border-4 border-blue-800 hover:bg-blue-800 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg"
           >
             Mobile Caregiver View
           </Link>
           <Link
             href="/family"
-            className="px-8 py-4 bg-blue-700 text-white text-lg font-semibold border-2 border-blue-800 hover:bg-blue-800 min-h-[3.5rem] inline-flex items-center justify-center"
+            className="px-10 py-5 bg-blue-700 text-white text-xl font-bold border-4 border-blue-800 hover:bg-blue-800 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg"
           >
             Family Sharing
           </Link>
           <Link
             href="/residents/new"
-            className="px-8 py-4 border-2 border-gray-400 text-black text-lg font-semibold hover:bg-gray-100 min-h-[3.5rem] inline-flex items-center justify-center"
+            className="px-10 py-5 border-4 border-gray-600 text-black text-xl font-bold hover:bg-gray-100 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg bg-white"
           >
             Add New Resident
           </Link>
           <Link
             href="/schedules/new"
-            className="px-8 py-4 border-2 border-gray-400 text-black text-lg font-semibold hover:bg-gray-100 min-h-[3.5rem] inline-flex items-center justify-center"
+            className="px-10 py-5 border-4 border-gray-600 text-black text-xl font-bold hover:bg-gray-100 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg bg-white"
           >
             Create Schedule
           </Link>
