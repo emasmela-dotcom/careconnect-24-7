@@ -8,128 +8,128 @@ export default function Home() {
   const { favorites, toggleFavorite, isFavorite } = useFavorites()
   const features = [
     {
-      icon: Users,
-      title: 'Resident Management',
-      description: 'Comprehensive profiles and health records for all residents',
-      href: '/residents',
-    },
-    {
-      icon: Calendar,
-      title: 'Care Schedules',
-      description: 'Manage medication, appointments, and daily care routines',
-      href: '/schedules',
-    },
-    {
-      icon: FileText,
-      title: 'Health Records',
-      description: 'Track medical history, medications, and vital signs',
-      href: '/health-records',
-    },
-    {
-      icon: Activity,
-      title: 'Activity Tracking',
-      description: 'Monitor daily activities and engagement programs',
-      href: '/activities',
-    },
-    {
-      icon: Heart,
-      title: 'Caregiver Management',
-      description: 'Staff scheduling, assignments, and performance tracking',
-      href: '/caregivers',
-    },
-    {
-      icon: Shield,
-      title: 'Safety & Compliance',
-      description: 'Incident reports, safety protocols, and regulatory compliance',
-      href: '/safety',
-    },
-    {
-      icon: Share2,
-      title: 'Family Sharing',
-      description: 'Share health data with family members and caregivers',
-      href: '/family',
-    },
-    {
-      icon: Smartphone,
-      title: 'Mobile Caregiver View',
-      description: 'Optimized mobile experience for caregivers',
-      href: '/caregiver-mobile',
-    },
-    {
       icon: Pill,
-      title: 'Medication Reminders',
-      description: 'Push notifications with pill photos and scheduling',
+      title: 'My Medications',
+      description: 'Never miss a dose with gentle reminders, pill photos, and easy scheduling',
       href: '/medications',
     },
     {
-      icon: ActivityIcon,
-      title: 'Vital Signs Tracking',
-      description: 'Blood pressure, weight, glucose with charts',
-      href: '/vitals',
+      icon: Calendar,
+      title: 'My Appointments',
+      description: 'Keep track of all your doctor visits and appointments in one place',
+      href: '/appointments',
     },
     {
-      icon: Calendar,
-      title: 'Appointment Management',
-      description: 'Doctor visits with prep checklists',
-      href: '/appointments',
+      icon: FileText,
+      title: 'My Health Records',
+      description: 'Keep track of your medical history, medications, and important health information',
+      href: '/health-records',
+    },
+    {
+      icon: ActivityIcon,
+      title: 'Vital Signs',
+      description: 'Track your blood pressure, weight, and glucose levels with easy-to-read charts',
+      href: '/vitals',
     },
     {
       icon: ClipboardList,
       title: 'Symptom Logging',
-      description: 'Daily health notes for doctor visits',
+      description: 'Keep daily health notes to share with your doctor at your next visit',
       href: '/symptoms',
+    },
+    {
+      icon: Heart,
+      title: 'My Care Team',
+      description: 'Manage your family members, helpers, and people who care for you',
+      href: '/caregivers',
+    },
+    {
+      icon: Share2,
+      title: 'Family Sharing',
+      description: 'Share your health information and schedules with trusted family members',
+      href: '/family',
+    },
+    {
+      icon: Activity,
+      title: 'Daily Activities',
+      description: 'Track your daily routines, exercise, and activities',
+      href: '/activities',
+    },
+    {
+      icon: Calendar,
+      title: 'My Schedule',
+      description: 'View your daily and weekly schedule of medications, appointments, and tasks',
+      href: '/schedules',
+    },
+    {
+      icon: Shield,
+      title: 'Safety & Emergency',
+      description: 'Emergency contacts, medical alerts, and important safety information',
+      href: '/safety',
+    },
+    {
+      icon: Smartphone,
+      title: 'Mobile App',
+      description: 'Access everything on your phone with our easy-to-use mobile view',
+      href: '/caregiver-mobile',
+    },
+    {
+      icon: Users,
+      title: 'My Profile',
+      description: 'Manage your personal information, preferences, and account settings',
+      href: '/residents',
     },
   ]
 
   return (
-    <div className="container mx-auto px-8 py-16 max-w-6xl">
-      {/* Hero Section - Extra large spacing and clear text */}
-      <div className="text-center mb-20">
-        <h1 className="text-5xl font-bold text-black mb-6">
+    <div className="container mx-auto px-4 py-8 max-w-6xl">
+      {/* Hero Section - Clear text that fits on screen */}
+      <div className="text-center mb-12">
+        <h1 className="text-3xl font-bold text-senior-blue-900 mb-4">
           Welcome to CareConnect 24/7
         </h1>
-        <div className="w-32 h-2 bg-blue-700 mx-auto mb-8"></div>
-        <p className="text-2xl text-black max-w-3xl mx-auto leading-relaxed mb-6 font-medium">
-          Your trusted partner in providing compassionate, around-the-clock care.
+        <div className="w-24 h-1 bg-senior-blue-600 mx-auto mb-6 rounded-full"></div>
+        <p className="text-lg text-gray-800 max-w-3xl mx-auto leading-relaxed mb-4 font-medium">
+          Simplify your life with easy-to-use tools for managing your health, medications, and daily activities.
         </p>
-        <p className="text-xl text-black max-w-2xl mx-auto leading-relaxed">
-          We&apos;re here to make care management simple, organized, and stress-free for you and your loved ones.
+        <p className="text-base text-gray-800 max-w-2xl mx-auto leading-relaxed">
+          Everything you need in one place, designed to be simple and clear.
         </p>
       </div>
 
-      {/* Stats Section - Simple, clear cards with strong borders */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20">
-        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
-          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
-          <div className="text-xl text-black font-semibold mb-2">Active Residents</div>
-          <div className="text-lg text-black">People we&apos;re caring for</div>
+      {/* Stats Section - High contrast cards with calming colors */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-12">
+        <div className="bg-white border-2 border-senior-gray-400 p-6 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <div className="text-3xl font-bold text-senior-blue-700 mb-3">0</div>
+          <div className="text-lg text-gray-900 font-semibold mb-1">My Medications</div>
+          <div className="text-sm text-gray-700">Active prescriptions</div>
         </div>
-        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
-          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
-          <div className="text-xl text-black font-semibold mb-2">Caregivers</div>
-          <div className="text-lg text-black">Dedicated team members</div>
+        <div className="bg-white border-2 border-senior-gray-400 p-6 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <div className="text-3xl font-bold text-senior-blue-700 mb-3">0</div>
+          <div className="text-lg text-gray-900 font-semibold mb-1">Today&apos;s Appointments</div>
+          <div className="text-sm text-gray-700">Scheduled for today</div>
         </div>
-        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
-          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
-          <div className="text-xl text-black font-semibold mb-2">Today&apos;s Appointments</div>
-          <div className="text-lg text-black">Scheduled for today</div>
+        <div className="bg-white border-2 border-senior-gray-400 p-6 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <div className="text-3xl font-bold text-senior-blue-700 mb-3">0</div>
+          <div className="text-lg text-gray-900 font-semibold mb-1">My Care Team</div>
+          <div className="text-sm text-gray-700">Family and helpers</div>
         </div>
-        <div className="bg-white border-4 border-blue-700 p-10 text-center shadow-lg">
-          <div className="text-5xl font-bold text-blue-700 mb-6">0</div>
-          <div className="text-xl text-black font-semibold mb-2">Pending Tasks</div>
-          <div className="text-lg text-black">Items to complete</div>
+        <div className="bg-white border-2 border-senior-gray-400 p-6 text-center rounded-lg shadow-sm hover:shadow-md transition-shadow">
+          <div className="text-3xl font-bold text-senior-blue-700 mb-3">0</div>
+          <div className="text-lg text-gray-900 font-semibold mb-1">Upcoming Tasks</div>
+          <div className="text-sm text-gray-700">Things to do today</div>
         </div>
       </div>
 
       {/* Favorites Section - Show if user has favorites */}
       {favorites.length > 0 && (
-        <div className="mb-20">
-          <div className="flex items-center gap-4 mb-6">
-            <Star className="fill-yellow-500 text-yellow-500" size={40} />
-            <h2 className="text-3xl font-bold text-black">Your Favorite Features</h2>
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <Star className="fill-yellow-500 text-yellow-500" size={24} />
+            <h2 className="text-2xl font-bold text-black">Your Favorite Features</h2>
           </div>
-          <p className="text-xl text-black mb-8 font-medium">Quick access to the tools you use most often</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+          <p className="text-base text-black mb-6 font-medium">Quick access to the tools you use most often</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-6">
             {features
               .filter(feature => favorites.includes(feature.href))
               .map((feature) => {
@@ -138,15 +138,15 @@ export default function Home() {
                   <div key={feature.title} className="relative">
                     <Link
                       href={feature.href}
-                      className="bg-white border-4 border-blue-700 p-10 shadow-lg block min-h-[240px] hover:shadow-xl"
+                      className="bg-white border-2 border-senior-gray-300 p-6 rounded-lg shadow-sm block min-h-[180px] hover:shadow-md hover:border-senior-blue-500 transition-all"
                     >
-                      <div className="w-20 h-20 border-4 border-blue-700 flex items-center justify-center mb-8 bg-blue-100">
-                        <Icon className="text-blue-800" size={36} />
+                      <div className="w-16 h-16 border-2 border-senior-blue-500 flex items-center justify-center mb-4 bg-senior-blue-50 rounded-lg">
+                        <Icon className="text-senior-blue-700" size={24} />
                       </div>
-                      <h3 className="text-2xl font-bold text-black mb-6">
+                      <h3 className="text-lg font-bold text-gray-900 mb-3">
                         {feature.title}
                       </h3>
-                      <p className="text-xl text-black leading-relaxed">{feature.description}</p>
+                      <p className="text-sm text-gray-700 leading-relaxed">{feature.description}</p>
                     </Link>
                     <button
                       onClick={(e) => {
@@ -154,10 +154,10 @@ export default function Home() {
                         e.stopPropagation()
                         toggleFavorite(feature.href)
                       }}
-                      className="absolute top-6 right-6 p-3 bg-blue-700 text-white rounded-full hover:bg-blue-800 min-w-[4rem] min-h-[4rem] flex items-center justify-center border-4 border-blue-800 shadow-lg"
+                      className="absolute top-4 right-4 p-2 bg-senior-blue-500 text-white rounded-full hover:bg-senior-blue-600 min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 border-senior-blue-700 shadow-sm hover:shadow-md transition-all"
                       aria-label="Remove from favorites"
                     >
-                      <Star size={28} className="fill-white" />
+                      <Star size={20} className="fill-white" />
                     </button>
                   </div>
                 )
@@ -167,10 +167,10 @@ export default function Home() {
       )}
 
       {/* All Features Grid - Simple, clear cards */}
-      <div className="mb-20">
-        <h2 className="text-3xl font-bold text-black mb-6">Everything You Need, Right Here</h2>
-        <p className="text-xl text-black mb-10 font-medium">Explore all our care management tools. Click the star to save your favorites for quick access.</p>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold text-black mb-4">Everything You Need, Right Here</h2>
+        <p className="text-base text-black mb-6 font-medium">Explore all our care management tools. Click the star to save your favorites for quick access.</p>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {features.map((feature) => {
           const Icon = feature.icon
             const favorite = isFavorite(feature.href)
@@ -178,19 +178,19 @@ export default function Home() {
               <div key={feature.title} className="relative">
             <Link
               href={feature.href}
-                  className={`bg-white border-4 p-10 shadow-lg block min-h-[240px] hover:shadow-xl ${
-                    favorite ? 'border-blue-700' : 'border-gray-400 hover:border-blue-700'
+                  className={`bg-white border-2 p-6 rounded-lg shadow-sm block min-h-[180px] hover:shadow-md transition-all ${
+                    favorite ? 'border-senior-blue-500 bg-senior-blue-50' : 'border-senior-gray-300 hover:border-senior-blue-500'
                   }`}
                 >
-                  <div className={`w-20 h-20 border-4 flex items-center justify-center mb-8 ${
-                    favorite ? 'border-blue-700 bg-blue-100' : 'border-gray-500 bg-gray-100'
+                  <div className={`w-16 h-16 border-2 flex items-center justify-center mb-4 rounded-lg ${
+                    favorite ? 'border-senior-blue-600 bg-senior-blue-100' : 'border-senior-gray-400 bg-senior-gray-100'
                   }`}>
-                    <Icon className={favorite ? 'text-blue-800' : 'text-black'} size={36} />
+                    <Icon className={favorite ? 'text-senior-blue-800' : 'text-gray-800'} size={24} />
               </div>
-              <h3 className="text-2xl font-bold text-black mb-6">
+              <h3 className="text-lg font-bold text-gray-900 mb-3">
                 {feature.title}
               </h3>
-              <p className="text-xl text-black leading-relaxed">{feature.description}</p>
+              <p className="text-sm text-gray-700 leading-relaxed">{feature.description}</p>
             </Link>
                 <button
                   onClick={(e) => {
@@ -201,14 +201,14 @@ export default function Home() {
                     e.stopPropagation()
                     toggleFavorite(feature.href)
                   }}
-                  className={`absolute top-6 right-6 p-3 rounded-full min-w-[4rem] min-h-[4rem] flex items-center justify-center border-4 shadow-lg ${
+                  className={`absolute top-4 right-4 p-2 rounded-full min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 shadow-sm hover:shadow-md transition-all ${
                     favorite
-                      ? 'bg-blue-700 text-white border-blue-800 hover:bg-blue-800'
-                      : 'bg-white text-black border-gray-500 hover:bg-gray-100 hover:border-blue-700'
+                      ? 'bg-senior-blue-500 text-white border-senior-blue-700 hover:bg-senior-blue-600'
+                      : 'bg-white text-gray-800 border-senior-gray-400 hover:bg-senior-gray-100 hover:border-senior-blue-500'
                   }`}
                   aria-label={favorite ? 'Remove from favorites' : 'Add to favorites'}
                 >
-                  <Star size={28} className={favorite ? 'fill-white' : 'fill-gray-400'} />
+                  <Star size={20} className={favorite ? 'fill-white' : 'fill-gray-400'} />
                 </button>
               </div>
             )
@@ -216,34 +216,34 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Quick Actions - Extra large, obvious buttons */}
-      <div className="mt-20 bg-white border-4 border-blue-700 p-12 shadow-lg">
-        <h2 className="text-3xl font-bold text-black mb-6">Get Started Quickly</h2>
-        <p className="text-xl text-black mb-10 font-medium">Common tasks to help you get things done faster</p>
-        <div className="flex flex-wrap gap-6">
+      {/* Quick Actions - High contrast, accessible buttons */}
+      <div className="mt-12 bg-white border-2 border-senior-gray-300 p-6 rounded-lg shadow-sm">
+        <h2 className="text-2xl font-bold text-gray-900 mb-4">Get Started Quickly</h2>
+        <p className="text-base text-gray-700 mb-6 font-medium">Common tasks to help you get things done faster</p>
+        <div className="flex flex-wrap gap-4">
           <Link
-            href="/caregiver-mobile"
-            className="px-10 py-5 bg-blue-700 text-white text-xl font-bold border-4 border-blue-800 hover:bg-blue-800 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg"
+            href="/medications/new"
+            className="px-6 py-3 bg-senior-blue-500 text-white text-base font-bold border-2 border-senior-blue-700 hover:bg-senior-blue-600 min-h-[3rem] min-w-[10rem] inline-flex items-center justify-center rounded-lg shadow-sm hover:shadow-md transition-all"
           >
-            Mobile Caregiver View
+            Add Medication
           </Link>
           <Link
-            href="/family"
-            className="px-10 py-5 bg-blue-700 text-white text-xl font-bold border-4 border-blue-800 hover:bg-blue-800 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg"
+            href="/appointments/new"
+            className="px-6 py-3 bg-senior-blue-500 text-white text-base font-bold border-2 border-senior-blue-700 hover:bg-senior-blue-600 min-h-[3rem] min-w-[10rem] inline-flex items-center justify-center rounded-lg shadow-sm hover:shadow-md transition-all"
           >
-            Family Sharing
+            Schedule Appointment
           </Link>
           <Link
-            href="/residents/new"
-            className="px-10 py-5 border-4 border-gray-600 text-black text-xl font-bold hover:bg-gray-100 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg bg-white"
+            href="/vitals/new"
+            className="px-6 py-3 border-2 border-senior-gray-400 text-gray-800 text-base font-bold hover:bg-senior-gray-100 hover:border-senior-blue-500 min-h-[3rem] min-w-[10rem] inline-flex items-center justify-center rounded-lg shadow-sm hover:shadow-md transition-all bg-white"
           >
-            Add New Resident
+            Record Vital Signs
           </Link>
           <Link
-            href="/schedules/new"
-            className="px-10 py-5 border-4 border-gray-600 text-black text-xl font-bold hover:bg-gray-100 min-h-[4rem] min-w-[12rem] inline-flex items-center justify-center shadow-lg bg-white"
+            href="/symptoms/new"
+            className="px-6 py-3 border-2 border-senior-gray-400 text-gray-800 text-base font-bold hover:bg-senior-gray-100 hover:border-senior-blue-500 min-h-[3rem] min-w-[10rem] inline-flex items-center justify-center rounded-lg shadow-sm hover:shadow-md transition-all bg-white"
           >
-            Create Schedule
+            Log Symptoms
           </Link>
         </div>
       </div>

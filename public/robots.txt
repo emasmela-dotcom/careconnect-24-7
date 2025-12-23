@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://careconnect-24-7.com/sitemap.xml
+
+# Disallow admin or private pages if any
+Disallow: /api/
+Disallow: /_next/
+

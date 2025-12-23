@@ -5,74 +5,75 @@
 /* Optimized for Users Aged 55-80: Clarity, Comfort, Trust */
 @layer base {
   html {
-    font-size: 20px; /* Increased base font size for better readability */
+    font-size: 16px; /* Standard base font size */
   }
   
   body {
-    color: #000000; /* Maximum contrast: pure black text */
-    background: #ffffff; /* Pure white background for maximum contrast */
-    font-size: 1.25rem; /* 20px base body text */
-    line-height: 1.8; /* Increased line height for comfortable reading */
+    color: #1a1a1a; /* Dark text for high contrast - WCAG AA compliant on off-white */
+    background: #fefefe; /* Off-white background - familiar and easy on aging eyes */
+    font-size: 1rem; /* 16px base body text */
+    line-height: 1.6; /* Comfortable line height */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
   
-  /* Large, readable headings with strong hierarchy */
+  /* Readable headings with strong hierarchy - high contrast, calming colors */
   h1 {
-    font-size: 3rem; /* 60px - very large for clarity */
+    font-size: 2rem; /* 32px - clear but not oversized */
     font-weight: 700;
-    line-height: 1.2;
-    color: #000000;
-    margin-bottom: 2rem;
-    letter-spacing: -0.02em;
+    line-height: 1.3;
+    color: #1e3a5f; /* Soft blue - trustworthy, calming, WCAG AA compliant */
+    margin-bottom: 1.5rem;
+    letter-spacing: -0.01em;
   }
   
   h2 {
-    font-size: 2.25rem; /* 45px */
+    font-size: 1.5rem; /* 24px */
     font-weight: 700;
-    line-height: 1.3;
-    color: #000000;
-    margin-bottom: 1.5rem;
+    line-height: 1.4;
+    color: #2c5282; /* Soft medium blue - familiar and calming */
+    margin-bottom: 1rem;
   }
   
   h3 {
-    font-size: 1.75rem; /* 35px */
+    font-size: 1.25rem; /* 20px */
     font-weight: 600;
     line-height: 1.4;
-    color: #000000;
-    margin-bottom: 1.25rem;
+    color: #1a1a1a; /* Dark text for high contrast */
+    margin-bottom: 0.75rem;
   }
   
-  /* Large body text - minimum 20px */
+  /* Readable body text - high contrast dark on light */
   p {
-    font-size: 1.25rem; /* 20px */
-    line-height: 1.8;
-    color: #000000; /* Pure black for maximum contrast */
-    margin-bottom: 1.25rem;
+    font-size: 1rem; /* 16px */
+    line-height: 1.6;
+    color: #1a1a1a; /* Dark text - WCAG AA compliant (4.5:1 contrast ratio) */
+    margin-bottom: 1rem;
   }
   
-  /* Large, accessible links with clear visibility */
+  /* Accessible links - soft blue, high contrast, WCAG AA compliant */
   a {
-    font-size: 1.25rem; /* 20px */
-    color: #0056b3; /* Strong blue for high contrast */
+    font-size: 1rem; /* 16px */
+    color: #1e40af; /* Soft blue - familiar, trustworthy, meets WCAG AA */
     text-decoration: underline;
-    text-underline-offset: 0.3rem;
+    text-underline-offset: 0.2rem;
     font-weight: 500;
   }
   
   a:hover {
-    color: #003d82; /* Darker blue on hover */
+    color: #1e3a8a; /* Slightly darker soft blue on hover - maintains contrast */
     text-decoration-thickness: 2px;
   }
   
-  /* Large, obvious buttons - minimum 56x56px touch target */
+  /* Clear buttons - comfortable touch target */
+  /* NOTE: Only affects CareConnect - not other apps */
   button {
-    font-size: 1.25rem; /* 20px */
-    min-height: 3.5rem; /* 56px minimum */
-    min-width: 3.5rem; /* 56px minimum */
-    padding: 1rem 2rem; /* Generous padding */
+    font-size: 1rem; /* 16px */
+    min-height: 2.5rem; /* 40px minimum */
+    min-width: 2.5rem; /* 40px minimum */
+    padding: 0.75rem 1.5rem; /* Comfortable padding */
     font-weight: 600;
-    border-width: 3px; /* Thicker borders for visibility */
+    border-width: 2px; /* Visible borders */
   }
   
   /* Minimal, gentle transitions only */
@@ -87,32 +88,61 @@
     text-wrap: balance;
   }
   
-  /* Large, obvious button styles for 55-80 age group */
+  /* Clear button styles for 55-80 age group */
   .btn-large {
-    font-size: 1.375rem; /* 22px */
-    padding: 1.25rem 2.5rem; /* Extra large clickable area */
-    min-height: 4rem; /* 64px - well above minimum */
-    min-width: 4rem;
+    font-size: 1.125rem; /* 18px */
+    padding: 0.875rem 1.75rem; /* Comfortable clickable area */
+    min-height: 3rem; /* 48px */
+    min-width: 3rem;
     font-weight: 700;
-    border-width: 3px; /* Thick, visible borders */
-    letter-spacing: 0.02em;
+    border-width: 2px; /* Visible borders */
+    letter-spacing: 0.01em;
   }
   
-  /* Maximum contrast text */
+  /* Maximum contrast text - WCAG AA compliant */
   .text-high-contrast {
-    color: #000000;
+    color: #1a1a1a; /* Dark text for high contrast */
     font-weight: 500;
   }
   
-  /* Extra generous spacing for clarity */
+  /* Comfortable spacing for clarity */
   .spacing-large {
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
   
-  /* Clear section dividers */
+  /* Clear section dividers - muted, calming */
   .section-divider {
-    border-top: 3px solid #000000;
-    margin: 3rem 0;
+    border-top: 2px solid #d1d5db; /* Muted warm gray - familiar and calming */
+    margin: 2rem 0;
+  }
+  
+  /* Accessible card styles - high contrast, calming colors */
+  .card-warm {
+    background: #ffffff; /* Pure white for maximum contrast */
+    border: 2px solid #9ca3af; /* Muted gray border - soft but visible */
+    border-radius: 8px; /* Gentle rounded corners - not too trendy */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    transition: all 0.2s ease;
+  }
+  
+  .card-warm:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Slightly stronger on hover */
+    border-color: #6b7280; /* Slightly darker on hover for feedback */
+  }
+  
+  /* Accessible button styles - solid colors, no gradients, WCAG AA compliant */
+  .btn-warm {
+    background: #2563eb; /* Solid soft blue - no gradients, familiar color */
+    color: #ffffff; /* White text - WCAG AA compliant (4.5:1 contrast) */
+    border: 2px solid #1e40af; /* Darker blue border for definition */
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(30, 64, 175, 0.2); /* Subtle shadow */
+    transition: all 0.2s ease;
+  }
+  
+  .btn-warm:hover {
+    background: #1e40af; /* Slightly darker soft blue on hover */
+    box-shadow: 0 3px 6px rgba(30, 64, 175, 0.3);
   }
 }
 
