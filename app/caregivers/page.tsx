@@ -1,77 +1,47 @@
 import Link from 'next/link'
-import { Plus, Search, Filter } from 'lucide-react'
+import { Plus, Heart, Users } from 'lucide-react'
 
-export default function CaregiversPage() {
-  const caregivers = []
+export default function MyCareTeamPage() {
+  // Care team = family members, helpers, people who help the active boomer
+  const careTeam = []
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="flex justify-between items-center mb-6">
+    <div className="container mx-auto px-6 py-12 max-w-7xl">
+      <div className="flex justify-between items-center mb-10">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Caregivers</h1>
-          <p className="text-gray-600 mt-1">Manage staff and caregiver information</p>
+          <h1 className="text-4xl font-bold text-black mb-3">My Care Team</h1>
+          <p className="text-xl text-gray-800">Manage your family members, helpers, and people who care for you</p>
         </div>
         <Link
           href="/caregivers/new"
-          className="flex items-center px-4 py-2 bg-blue-600 text-white border border-blue-700 hover:bg-blue-700 transition-colors"
+          className="flex items-center px-8 py-4 bg-blue-700 text-white text-lg font-semibold border-2 border-blue-800 hover:bg-blue-800 min-h-[3.5rem]"
         >
-          <Plus size={20} className="mr-2" />
-          Add New Caregiver
+          <Plus size={24} className="mr-3" />
+          Add to Care Team
         </Link>
       </div>
 
-      {/* Search and Filter */}
-      <div className="bg-white border border-gray-200 p-4 mb-6">
-        <div className="flex gap-4">
-          <div className="flex-1 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
-            <input
-              type="text"
-              placeholder="Search caregivers by name, role, or ID..."
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 focus:ring-2 focus:ring-blue-600 focus:border-blue-600"
-            />
+      {/* Care Team List */}
+      {careTeam.length === 0 ? (
+        <div className="bg-white border-2 border-gray-300 p-16 text-center shadow-sm">
+          <div className="text-gray-600 mb-6">
+            <Heart size={80} className="mx-auto" />
           </div>
-          <button className="flex items-center px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50">
-            <Filter size={20} className="mr-2" />
-            Filter
-          </button>
-        </div>
-      </div>
-
-      {/* Caregivers List */}
-      {caregivers.length === 0 ? (
-        <div className="bg-white border border-gray-200 p-12 text-center">
-          <div className="text-gray-400 mb-4">
-            <svg
-              className="mx-auto h-12 w-12"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
-              />
-            </svg>
-          </div>
-          <h3 className="text-lg font-medium text-gray-900 mb-2">No caregivers yet</h3>
-          <p className="text-gray-600 mb-4">Get started by adding your first caregiver.</p>
+          <h3 className="text-2xl font-semibold text-black mb-4">No care team members yet</h3>
+          <p className="text-xl text-gray-800 mb-8">Add family members, helpers, or people who help care for you.</p>
           <Link
             href="/caregivers/new"
-            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white border border-blue-700 hover:bg-blue-700 transition-colors"
+            className="inline-flex items-center px-8 py-4 bg-blue-700 text-white text-lg font-semibold border-2 border-blue-800 hover:bg-blue-800 min-h-[3.5rem]"
           >
-            <Plus size={20} className="mr-2" />
-            Add New Caregiver
+            <Plus size={24} className="mr-3" />
+            Add to Care Team
           </Link>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {/* Caregiver cards will be rendered here */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Care team member cards will be rendered here */}
         </div>
       )}
     </div>
   )
 }
-

@@ -9,11 +9,11 @@ import { useFavorites } from './FavoritesContext'
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
-  { name: 'Residents', href: '/residents', icon: Users },
-  { name: 'Caregivers', href: '/caregivers', icon: Heart },
-  { name: 'Medications', href: '/medications', icon: Pill },
+  { name: 'My Profile', href: '/residents', icon: Users },
+  { name: 'My Care Team', href: '/caregivers', icon: Heart },
+  { name: 'My Medications', href: '/medications', icon: Pill },
   { name: 'Vital Signs', href: '/vitals', icon: ActivityIcon },
-  { name: 'Appointments', href: '/appointments', icon: Calendar },
+  { name: 'My Appointments', href: '/appointments', icon: Calendar },
   { name: 'Symptoms', href: '/symptoms', icon: ClipboardList },
   { name: 'Health Records', href: '/health-records', icon: FileText },
   { name: 'Activities', href: '/activities', icon: Activity },
@@ -27,24 +27,24 @@ export default function Navigation() {
   const { favorites } = useFavorites()
 
   return (
-    <nav className="bg-white shadow-lg border-b-4 border-blue-700">
-      <div className="container mx-auto px-8">
-        <div className="flex items-center justify-between h-24">
-          <div className="flex items-center gap-4">
-            <Heart className="text-blue-700" size={40} />
-            <Link href="/" className="text-4xl font-bold text-black hover:no-underline">
+    <nav className="bg-gradient-to-r from-blue-50 via-white to-green-50 shadow-lg border-b-2 border-blue-400">
+      <div className="container mx-auto px-4">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center gap-3">
+            <Heart className="text-red-500 fill-red-500" size={28} />
+            <Link href="/" className="text-2xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-green-600 bg-clip-text text-transparent hover:no-underline">
               CareConnect 24/7
             </Link>
           </div>
           
           {/* Desktop Navigation - Large, clear buttons */}
-          <div className="hidden lg:flex space-x-3">
+          <div className="hidden lg:flex space-x-2">
             {favorites.length > 0 && (
               <Link
                 href="/"
-                className="flex items-center px-8 py-4 text-xl font-bold border-b-4 min-h-[4rem] border-transparent text-black hover:bg-blue-50 hover:border-blue-700"
+                className="flex items-center px-4 py-2 text-base font-bold border-b-2 min-h-[3rem] border-transparent text-gray-800 hover:bg-blue-50 hover:border-blue-500"
               >
-                <Star size={28} className="mr-4 fill-yellow-500 text-yellow-500" />
+                <Star size={20} className="mr-2 fill-yellow-500 text-yellow-500" />
                 Favorites ({favorites.length})
               </Link>
             )}
@@ -57,16 +57,16 @@ export default function Navigation() {
                   key={item.name}
                   href={item.href}
                   className={clsx(
-                    'flex items-center px-8 py-4 text-xl font-bold border-b-4 min-h-[4rem] relative',
+                    'flex items-center px-4 py-2 text-base font-bold border-b-2 min-h-[3rem] relative',
                     isActive
-                      ? 'border-blue-700 text-black bg-blue-100'
-                      : 'border-transparent text-black hover:bg-gray-100 hover:border-blue-500'
+                      ? 'border-blue-500 text-gray-900 bg-gradient-to-b from-blue-100 to-blue-50'
+                      : 'border-transparent text-gray-800 hover:bg-gradient-to-b hover:from-blue-50 hover:to-white hover:border-blue-400'
                   )}
                 >
-                  <Icon size={28} className="mr-4" />
+                  <Icon size={20} className="mr-2" />
                   {item.name}
                   {isFav && (
-                    <Star size={20} className="ml-3 fill-yellow-500 text-yellow-500" />
+                    <Star size={16} className="ml-2 fill-yellow-500 text-yellow-500" />
                   )}
                 </Link>
               )
@@ -76,24 +76,24 @@ export default function Navigation() {
           {/* Mobile Menu Button - Extra large for easy clicking */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-5 rounded-lg text-black hover:bg-gray-200 min-w-[4rem] min-h-[4rem] border-4 border-gray-400"
+            className="lg:hidden p-3 rounded-lg text-black hover:bg-gray-200 min-w-[3rem] min-h-[3rem] border-2 border-gray-400"
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X size={32} /> : <Menu size={32} />}
+            {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
         {/* Mobile Navigation Menu - Large, clear buttons */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-t-4 border-gray-400 py-8">
-            <div className="flex flex-col space-y-3">
+          <div className="lg:hidden border-t-2 border-gray-400 py-4">
+            <div className="flex flex-col space-y-2">
               {favorites.length > 0 && (
                 <Link
                   href="/"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="flex items-center px-8 py-5 rounded-lg text-xl font-bold min-h-[4rem] border-4 border-transparent text-black hover:bg-blue-50 hover:border-blue-700 bg-white"
+                  className="flex items-center px-4 py-3 rounded-lg text-base font-bold min-h-[3rem] border-2 border-transparent text-gray-800 hover:bg-blue-50 hover:border-blue-500 bg-white"
                 >
-                  <Star size={32} className="mr-5 fill-yellow-500 text-yellow-500" />
+                  <Star size={20} className="mr-3 fill-yellow-500 text-yellow-500" />
                   Favorites ({favorites.length})
                 </Link>
               )}
@@ -107,16 +107,16 @@ export default function Navigation() {
                     href={item.href}
                     onClick={() => setMobileMenuOpen(false)}
                     className={clsx(
-                      'flex items-center px-8 py-5 rounded-lg text-xl font-bold min-h-[4rem] border-4 bg-white',
+                      'flex items-center px-4 py-3 rounded-lg text-base font-bold min-h-[3rem] border-2 bg-white',
                       isActive
-                        ? 'bg-blue-100 text-black border-blue-700'
-                        : 'text-black hover:bg-gray-100 border-gray-400'
+                        ? 'bg-blue-100 text-gray-900 border-blue-500'
+                        : 'text-gray-800 hover:bg-gray-100 border-gray-400'
                     )}
                   >
-                    <Icon size={32} className="mr-5" />
+                    <Icon size={20} className="mr-3" />
                     {item.name}
                     {isFav && (
-                      <Star size={24} className="ml-3 fill-yellow-500 text-yellow-500" />
+                      <Star size={16} className="ml-2 fill-yellow-500 text-yellow-500" />
                     )}
                   </Link>
                 )
