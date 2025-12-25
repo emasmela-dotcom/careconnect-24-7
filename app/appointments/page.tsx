@@ -1,32 +1,12 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { Plus, Calendar, Clock, MapPin, FileText, CheckCircle2 } from 'lucide-react'
 import { format } from 'date-fns'
-
-interface Appointment {
-  id: string
-  residentId: string
-  residentName: string
-  type: string
-  doctorName: string
-  date: string
-  time: string
-  location?: string
-  address?: string
-  notes?: string
-  checklist: ChecklistItem[]
-}
-
-interface ChecklistItem {
-  id: string
-  text: string
-  completed: boolean
-}
+import { useData } from '@/components/DataContext'
 
 export default function AppointmentsPage() {
-  const [appointments] = useState<Appointment[]>([])
+  const { appointments } = useData()
   const today = new Date()
   const upcoming = appointments.filter(apt => new Date(apt.date) >= today)
   const past = appointments.filter(apt => new Date(apt.date) < today)

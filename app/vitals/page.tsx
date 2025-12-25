@@ -1,25 +1,14 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useMemo } from 'react'
 import Link from 'next/link'
 import { Plus, Heart, Activity, Scale, Droplet } from 'lucide-react'
-
-interface VitalSign {
-  id: string
-  residentId: string
-  residentName: string
-  date: string
-  time: string
-  bloodPressure?: { systolic: number; diastolic: number }
-  heartRate?: number
-  temperature?: number
-  weight?: number
-  glucose?: number
-  recordedBy: string
-}
+import { useData, VitalSign } from '@/components/DataContext'
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { format, parse, subDays } from 'date-fns'
 
 export default function VitalsPage() {
-  const [vitals] = useState<VitalSign[]>([])
+  const { vitals } = useData()
   const [selectedMetric, setSelectedMetric] = useState<'bloodPressure' | 'heartRate' | 'weight' | 'glucose'>('bloodPressure')
 
   return (
@@ -97,8 +86,8 @@ export default function VitalsPage() {
                 Glucose
               </button>
             </div>
-            <div className="mt-6 h-64 border border-gray-200 flex items-center justify-center">
-              <p className="text-gray-500">Chart visualization will appear here</p>
+            <div className="mt-6 h-64 border border-gray-200 p-4">
+              <VitalSignsChart vitals={vitals} metric={selectedMetric} />
             </div>
           </div>
 
@@ -158,6 +147,108 @@ export default function VitalsPage() {
         </>
       )}
     </div>
+  )
+}
+
+function VitalSignsChart({ vitals, metric }: { vitals: VitalSign[]; metric: 'bloodPressure' | 'heartRate' | 'weight' | 'glucose' }) {
+  const chartData = useMemo(() => {
+    if (vitals.length === 0) return []
+
+    // Get last 1 year of data
+    const oneYearAgo = subDays(new Date(), 365)
+    const filteredVitals = vitals
+      .filter(v => {
+        try {
+          const vitalDate = parse(v.date, 'yyyy-MM-dd', new Date())
+          return vitalDate >= oneYearAgo
+        } catch {
+          return false
+        }
+      })
+      .sort((a, b) => {
+        try {
+          const dateA = parse(a.date, 'yyyy-MM-dd', new Date())
+          const dateB = parse(b.date, 'yyyy-MM-dd', new Date())
+          return dateA.getTime() - dateB.getTime()
+        } catch {
+          return 0
+        }
+      })
+
+    if (metric === 'bloodPressure') {
+      return filteredVitals
+        .filter(v => v.bloodPressure)
+        .map(v => ({
+          date: format(parse(v.date, 'yyyy-MM-dd', new Date()), 'MMM dd'),
+          systolic: v.bloodPressure!.systolic,
+          diastolic: v.bloodPressure!.diastolic,
+        }))
+    } else if (metric === 'heartRate') {
+      return filteredVitals
+        .filter(v => v.heartRate)
+        .map(v => ({
+          date: format(parse(v.date, 'yyyy-MM-dd', new Date()), 'MMM dd'),
+          value: v.heartRate,
+        }))
+    } else if (metric === 'weight') {
+      return filteredVitals
+        .filter(v => v.weight)
+        .map(v => ({
+          date: format(parse(v.date, 'yyyy-MM-dd', new Date()), 'MMM dd'),
+          value: v.weight,
+        }))
+    } else if (metric === 'glucose') {
+      return filteredVitals
+        .filter(v => v.glucose)
+        .map(v => ({
+          date: format(parse(v.date, 'yyyy-MM-dd', new Date()), 'MMM dd'),
+          value: v.glucose,
+        }))
+    }
+    return []
+  }, [vitals, metric])
+
+  if (chartData.length === 0) {
+    return (
+      <div className="flex items-center justify-center h-full">
+        <p className="text-gray-500">No data available for the selected metric</p>
+      </div>
+    )
+  }
+
+  if (metric === 'bloodPressure') {
+    return (
+      <ResponsiveContainer width="100%" height="100%">
+        <LineChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="date" />
+          <YAxis />
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" dataKey="systolic" stroke="#8884d8" name="Systolic" strokeWidth={2} />
+          <Line type="monotone" dataKey="diastolic" stroke="#82ca9d" name="Diastolic" strokeWidth={2} />
+        </LineChart>
+      </ResponsiveContainer>
+    )
+  }
+
+  return (
+    <ResponsiveContainer width="100%" height="100%">
+      <LineChart data={chartData}>
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="date" />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <Line 
+          type="monotone" 
+          dataKey="value" 
+          stroke="#8884d8" 
+          name={metric === 'heartRate' ? 'Heart Rate (bpm)' : metric === 'weight' ? 'Weight (lbs)' : 'Glucose (mg/dL)'}
+          strokeWidth={2} 
+        />
+      </LineChart>
+    </ResponsiveContainer>
   )
 }
 

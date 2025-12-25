@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Users, Calendar, FileText, Activity, Heart, Shield, Menu, X, Share2, Pill, Activity as ActivityIcon, ClipboardList, Star } from 'lucide-react'
+import { Home, Users, Calendar, FileText, Activity, Heart, Shield, Menu, X, Share2, Pill, Activity as ActivityIcon, ClipboardList, Star, Download } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useFavorites } from './FavoritesContext'
 
@@ -19,6 +19,7 @@ const navigation = [
   { name: 'Activities', href: '/activities', icon: Activity },
   { name: 'Safety', href: '/safety', icon: Shield },
   { name: 'Family Sharing', href: '/family', icon: Share2 },
+  { name: 'Backup & Export', href: '/backup', icon: Download },
 ]
 
 export default function Navigation() {

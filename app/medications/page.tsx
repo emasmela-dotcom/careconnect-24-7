@@ -1,25 +1,11 @@
 'use client'
 
-import { useState } from 'react'
 import Link from 'next/link'
 import { Plus, Pill, Clock, Calendar, Image as ImageIcon } from 'lucide-react'
-
-interface Medication {
-  id: string
-  name: string
-  dosage: string
-  frequency: string
-  times: string[]
-  residentId: string
-  residentName: string
-  photoUrl?: string
-  startDate: string
-  endDate?: string
-  notes?: string
-}
+import { useData } from '@/components/DataContext'
 
 export default function MedicationsPage() {
-  const [medications] = useState<Medication[]>([])
+  const { medications } = useData()
 
   return (
     <div className="container mx-auto px-6 py-12 max-w-7xl">

@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import { FavoritesProvider } from '@/components/FavoritesContext'
+import { DataProvider } from '@/components/DataContextAPI'
+import ReminderNotification from '@/components/ReminderNotification'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -41,12 +43,15 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <FavoritesProvider>
-          <Navigation />
-          <main className="min-h-screen">
-            <div className="py-8">
-              {children}
-            </div>
-          </main>
+          <DataProvider>
+            <Navigation />
+            <main className="min-h-screen">
+              <div className="py-8">
+                {children}
+              </div>
+            </main>
+            <ReminderNotification />
+          </DataProvider>
         </FavoritesProvider>
       </body>
     </html>
