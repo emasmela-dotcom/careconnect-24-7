@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { Plus, Calendar, Clock, MapPin, FileText, CheckCircle2 } from 'lucide-react'
 import { format } from 'date-fns'
-import { useData } from '@/components/DataContext'
+import { useData } from '@/components/DataContextAPI'
 
 export default function AppointmentsPage() {
   const { appointments } = useData()

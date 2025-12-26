@@ -1,11 +1,25 @@
 'use client'
 
 import Link from 'next/link'
-import { Plus, Pill, Clock, Calendar, Image as ImageIcon } from 'lucide-react'
-import { useData } from '@/components/DataContext'
+import { Plus, Pill, Clock, Calendar, Image as ImageIcon, Trash2 } from 'lucide-react'
+import { useData } from '@/components/DataContextAPI'
+import { useRouter } from 'next/navigation'
 
 export default function MedicationsPage() {
-  const { medications } = useData()
+  const { medications, deleteMedication } = useData()
+  const router = useRouter()
+
+  const handleDelete = async (id: string, name: string) => {
+    if (window.confirm(`Are you sure you want to delete "${name}"? This action cannot be undone.`)) {
+      try {
+        await deleteMedication(id)
+        router.refresh()
+      } catch (err) {
+        console.error('Error deleting medication:', err)
+        alert('Failed to delete medication. Please try again.')
+      }
+    }
+  }
 
   return (
     <div className="container mx-auto px-6 py-12 max-w-7xl">
@@ -81,6 +95,13 @@ export default function MedicationsPage() {
                   >
                     Edit
                   </Link>
+                  <button
+                    onClick={() => handleDelete(med.id, med.name)}
+                    className="px-6 py-3 text-lg font-semibold border-2 border-red-600 text-red-600 hover:bg-red-50 min-h-[3.5rem] inline-flex items-center"
+                  >
+                    <Trash2 size={20} className="mr-2" />
+                    Delete
+                  </button>
                 </div>
               </div>
             </div>

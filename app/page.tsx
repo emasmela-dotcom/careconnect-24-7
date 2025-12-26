@@ -3,9 +3,33 @@
 import Link from 'next/link'
 import { Users, Calendar, FileText, Activity, Heart, Shield, Share2, Smartphone, Pill, Activity as ActivityIcon, ClipboardList, Star, RefreshCw, CheckCircle2 } from 'lucide-react'
 import { useFavorites } from '@/components/FavoritesContext'
+import { useData } from '@/components/DataContextAPI'
+import { format, isToday } from 'date-fns'
 
 export default function Home() {
   const { favorites, toggleFavorite, isFavorite } = useFavorites()
+  const { medications, appointments, caregivers, vitals } = useData()
+  
+  // Calculate real stats
+  const medicationCount = medications.length
+  const todayAppointments = appointments.filter(apt => {
+    if (!apt.date) return false
+    try {
+      return isToday(new Date(apt.date))
+    } catch {
+      return false
+    }
+  }).length
+  const caregiverCount = caregivers.length
+  const upcomingTasks = appointments.filter(apt => {
+    if (!apt.date) return false
+    try {
+      const aptDate = new Date(apt.date)
+      return aptDate >= new Date() && aptDate <= new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+    } catch {
+      return false
+    }
+  }).length
   
   // Colorful feature cards with different warm colors
   const features = [
@@ -129,24 +153,24 @@ export default function Home() {
       {/* Stats Section - Colorful cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div className="bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-blue-700 mb-2">0</div>
+          <div className="text-3xl font-bold text-blue-700 mb-2">{medicationCount}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">My Medications</div>
           <div className="text-sm text-gray-700">Active prescriptions</div>
         </div>
         <div className="bg-gradient-to-br from-green-100 to-green-200 border-2 border-green-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-green-700 mb-2">0</div>
+          <div className="text-3xl font-bold text-green-700 mb-2">{todayAppointments}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">Today&apos;s Appointments</div>
           <div className="text-sm text-gray-700">Scheduled for today</div>
         </div>
         <div className="bg-gradient-to-br from-orange-100 to-orange-200 border-2 border-orange-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-orange-700 mb-2">0</div>
+          <div className="text-3xl font-bold text-orange-700 mb-2">{caregiverCount}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">My Care Team</div>
           <div className="text-sm text-gray-700">Family and helpers</div>
         </div>
         <div className="bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-purple-700 mb-2">0</div>
+          <div className="text-3xl font-bold text-purple-700 mb-2">{upcomingTasks}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">Upcoming Tasks</div>
-          <div className="text-sm text-gray-700">Things to do today</div>
+          <div className="text-sm text-gray-700">Next 7 days</div>
         </div>
       </div>
 

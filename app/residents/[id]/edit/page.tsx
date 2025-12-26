@@ -2,15 +2,16 @@
 
 import { useState, useEffect } from 'react'
 import { useRouter, useParams } from 'next/navigation'
-import { useData } from '@/components/DataContext'
-import { Save, X } from 'lucide-react'
+import { useData } from '@/components/DataContextAPI'
+import { Save, X, Trash2 } from 'lucide-react'
 import Link from 'next/link'
 
 export default function EditResidentPage() {
   const router = useRouter()
   const params = useParams()
-  const { getResident, updateResident } = useData()
+  const { getResident, updateResident, deleteResident } = useData()
   const resident = getResident(params.id as string)
+  const [showDeleteConfirm, setShowDeleteConfirm] = useState(false)
 
   const [formData, setFormData] = useState({
     name: '',
@@ -64,6 +65,18 @@ export default function EditResidentPage() {
       ...formData,
       [e.target.name]: e.target.value,
     })
+  }
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this profile? This action cannot be undone.')) {
+      try {
+        await deleteResident(resident.id)
+        router.push('/residents')
+      } catch (err) {
+        console.error('Error deleting resident:', err)
+        alert('Failed to delete profile. Please try again.')
+      }
+    }
   }
 
   return (
@@ -197,6 +210,14 @@ export default function EditResidentPage() {
             <X size={24} className="mr-3" />
             Cancel
           </Link>
+          <button
+            type="button"
+            onClick={handleDelete}
+            className="flex items-center justify-center px-8 py-4 bg-red-600 text-white text-xl font-bold border-4 border-red-700 hover:bg-red-700 rounded-xl shadow-lg min-h-[4rem]"
+          >
+            <Trash2 size={24} className="mr-3" />
+            Delete
+          </button>
         </div>
       </form>
     </div>

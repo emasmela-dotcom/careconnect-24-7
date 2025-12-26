@@ -6,6 +6,7 @@ import { usePathname } from 'next/navigation'
 import { Home, Users, Calendar, FileText, Activity, Heart, Shield, Menu, X, Share2, Pill, Activity as ActivityIcon, ClipboardList, Star, Download } from 'lucide-react'
 import { clsx } from 'clsx'
 import { useFavorites } from './FavoritesContext'
+import { UserButton, SignInButton, useUser } from '@clerk/nextjs'
 
 const navigation = [
   { name: 'Dashboard', href: '/', icon: Home },
@@ -26,6 +27,7 @@ export default function Navigation() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { favorites } = useFavorites()
+  const { isSignedIn } = useUser()
 
   return (
     <nav className="bg-gradient-to-r from-blue-50 via-white to-green-50 shadow-lg border-b-2 border-blue-400">
@@ -72,6 +74,25 @@ export default function Navigation() {
                 </Link>
               )
             })}
+          </div>
+
+          {/* Authentication Button */}
+          <div className="hidden lg:flex items-center ml-4">
+            {isSignedIn ? (
+              <UserButton 
+                appearance={{
+                  elements: {
+                    avatarBox: "w-10 h-10",
+                  }
+                }}
+              />
+            ) : (
+              <SignInButton mode="modal">
+                <button className="px-4 py-2 text-base font-bold border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-lg min-h-[3rem]">
+                  Sign In
+                </button>
+              </SignInButton>
+            )}
           </div>
 
           {/* Mobile Menu Button - Extra large for easy clicking */}
@@ -122,6 +143,26 @@ export default function Navigation() {
                   </Link>
                 )
               })}
+              {/* Mobile Authentication */}
+              <div className="px-4 py-3 border-t-2 border-gray-400 mt-2">
+                {isSignedIn ? (
+                  <div className="flex items-center justify-center">
+                    <UserButton 
+                      appearance={{
+                        elements: {
+                          avatarBox: "w-10 h-10",
+                        }
+                      }}
+                    />
+                  </div>
+                ) : (
+                  <SignInButton mode="modal">
+                    <button className="w-full px-4 py-3 text-base font-bold border-2 border-blue-600 text-blue-600 hover:bg-blue-50 rounded-lg min-h-[3rem]">
+                      Sign In
+                    </button>
+                  </SignInButton>
+                )}
+              </div>
             </div>
           </div>
         )}
