@@ -50,6 +50,13 @@ export async function POST(request: NextRequest) {
     const userId = await getUserId(request)
     const body = await request.json()
     
+    // Convert empty strings to null for date fields
+    // start_date is required, so use today's date if not provided
+    const startDate = body.startDate && body.startDate.trim() !== '' 
+      ? body.startDate 
+      : new Date().toISOString().split('T')[0] // Today's date in YYYY-MM-DD format
+    const endDate = body.endDate && body.endDate.trim() !== '' ? body.endDate : null
+    
     const result = await sql`
       INSERT INTO medications (
         user_id,
@@ -73,8 +80,8 @@ export async function POST(request: NextRequest) {
         ${body.frequency || null},
         ${body.times || []},
         ${body.photoUrl || null},
-        ${body.startDate},
-        ${body.endDate || null},
+        ${startDate},
+        ${endDate},
         ${body.notes || null}
       )
       RETURNING 

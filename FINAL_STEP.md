@@ -51,3 +51,5 @@ sed -i '' 's/YOUR_PASSWORD/your-actual-password/g' .env.local
 
 **Once you update the password, test it!** 🚀
 
+
+

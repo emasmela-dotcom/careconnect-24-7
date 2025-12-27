@@ -1,11 +1,13 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-import { ClerkProvider } from '@clerk/nextjs'
 import './globals.css'
 import Navigation from '@/components/Navigation'
 import { FavoritesProvider } from '@/components/FavoritesContext'
 import { DataProvider } from '@/components/DataContextAPI'
 import ReminderNotification from '@/components/ReminderNotification'
+import NotificationSetup from '@/components/NotificationSetup'
+import MyToolsPanel from '@/components/MyToolsPanel'
+import UsageTracker from '@/components/UsageTracker'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -37,27 +39,28 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <ClerkProvider>
-      <html lang="en">
-        <head>
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="apple-touch-icon" href="/icon-192.png" />
-        </head>
-        <body className={inter.className}>
-          <FavoritesProvider>
-            <DataProvider>
-              <Navigation />
-              <main className="min-h-screen">
-                <div className="py-8">
-                  {children}
-                </div>
-              </main>
-              <ReminderNotification />
-            </DataProvider>
-          </FavoritesProvider>
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="apple-touch-icon" href="/icon-192.png" />
+      </head>
+      <body className={inter.className}>
+        <FavoritesProvider>
+          <DataProvider>
+            <UsageTracker />
+            <NotificationSetup />
+            <Navigation />
+            <main className="min-h-screen">
+              <div className="py-8">
+                {children}
+              </div>
+            </main>
+            <ReminderNotification />
+            <MyToolsPanel />
+          </DataProvider>
+        </FavoritesProvider>
+      </body>
+    </html>
   )
 }
 

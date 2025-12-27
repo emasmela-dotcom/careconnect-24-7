@@ -76,3 +76,5 @@ You should see:
 
 *Once you create .env.local with your connection string, the app will connect to Neon!*
 
+
+

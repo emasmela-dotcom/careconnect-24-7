@@ -1,13 +1,11 @@
-import { authMiddleware } from "@clerk/nextjs";
-
-export default authMiddleware({
-  // Public routes that don't require authentication
-  publicRoutes: ["/", "/api/webhooks(.*)"],
-  // Routes that require authentication
-  ignoredRoutes: ["/api/webhooks(.*)"],
-});
+// Middleware disabled - using default user system
+// No authentication required for development
+export default function middleware() {
+  // Pass through - no authentication checks
+}
 
 export const config = {
   matcher: ["/((?!.+\\.[\\w]+$|_next).*)", "/", "/(api|trpc)(.*)"],
 };
+
 

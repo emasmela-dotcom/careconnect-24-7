@@ -1,44 +1,34 @@
 import { sql } from './db'
-import { auth } from '@clerk/nextjs/server'
+import { NextRequest } from 'next/server'
 
-// Default user email for development (fallback if Clerk not configured)
+// Default user email for development (fallback)
 const DEFAULT_USER_EMAIL = 'default@careconnect.local'
 
 /**
- * Get or create the authenticated user and return their UUID
- * Uses Clerk authentication if available, falls back to default user for development
+ * Get the authenticated user ID from request
+ * Checks localStorage token or falls back to default user
  */
-export async function getDefaultUserId(): Promise<string> {
+export async function getUserId(request?: NextRequest): Promise<string> {
   try {
-    // Try to get authenticated user from Clerk
-    const { userId } = await auth()
-    
-    if (userId) {
-      // User is authenticated - get or create user in database
-      const existing = await sql`
-        SELECT id::text as id
-        FROM users
-        WHERE id = ${userId}::uuid
-        LIMIT 1
-      `
-      
-      if (existing.length > 0) {
-        return existing[0].id
+    // Try to get user from request headers (if available)
+    if (request) {
+      const authHeader = request.headers.get('authorization')
+      if (authHeader) {
+        // Parse token (simple implementation)
+        try {
+          const token = authHeader.replace('Bearer ', '')
+          const decoded = Buffer.from(token, 'base64').toString('utf-8')
+          const [userId] = decoded.split(':')
+          if (userId) {
+            return userId
+          }
+        } catch {
+          // Invalid token, continue to fallback
+        }
       }
-      
-      // Create user record for authenticated Clerk user
-      // Note: We'll need to get email/name from Clerk user object
-      // For now, create with Clerk user ID
-      const newUser = await sql`
-        INSERT INTO users (id, email, name)
-        VALUES (${userId}::uuid, ${`user-${userId}@careconnect.local`}, 'User')
-        RETURNING id::text as id
-      `
-      
-      return newUser[0].id
     }
-    
-    // Fallback: No authentication - use default user (development only)
+
+    // Fallback: Get or create default user
     const existing = await sql`
       SELECT id::text as id
       FROM users
@@ -62,5 +52,13 @@ export async function getDefaultUserId(): Promise<string> {
     console.error('Error getting user ID:', error)
     throw error
   }
+}
+
+/**
+ * Get or create the default user and return their UUID
+ * @deprecated Use getUserId() instead
+ */
+export async function getDefaultUserId(): Promise<string> {
+  return getUserId()
 }
 

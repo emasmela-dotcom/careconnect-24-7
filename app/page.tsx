@@ -135,7 +135,7 @@ export default function Home() {
   ]
 
   return (
-    <div className="container mx-auto px-4 py-8 max-w-6xl">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 max-w-6xl">
       {/* Hero Section - Warm and inviting */}
       <div className="text-center mb-8 bg-gradient-to-r from-blue-100 via-purple-50 to-green-100 p-6 rounded-2xl border-2 border-blue-300 shadow-lg">
         <h1 className="text-3xl font-bold text-gray-900 mb-4">
@@ -150,25 +150,25 @@ export default function Home() {
         </p>
       </div>
 
-      {/* Stats Section - Colorful cards */}
+      {/* Stats Section - Colorful cards - Fixed alignment */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <div className="bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-blue-700 mb-2">{medicationCount}</div>
+        <div className="bg-gradient-to-br from-blue-100 to-blue-200 border-2 border-blue-400 p-6 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow flex flex-col justify-center items-center min-h-[160px]">
+          <div className="text-4xl font-bold text-blue-700 mb-2">{medicationCount}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">My Medications</div>
           <div className="text-sm text-gray-700">Active prescriptions</div>
         </div>
-        <div className="bg-gradient-to-br from-green-100 to-green-200 border-2 border-green-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-green-700 mb-2">{todayAppointments}</div>
+        <div className="bg-gradient-to-br from-green-100 to-green-200 border-2 border-green-400 p-6 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow flex flex-col justify-center items-center min-h-[160px]">
+          <div className="text-4xl font-bold text-green-700 mb-2">{todayAppointments}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">Today&apos;s Appointments</div>
           <div className="text-sm text-gray-700">Scheduled for today</div>
         </div>
-        <div className="bg-gradient-to-br from-orange-100 to-orange-200 border-2 border-orange-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-orange-700 mb-2">{caregiverCount}</div>
+        <div className="bg-gradient-to-br from-orange-100 to-orange-200 border-2 border-orange-400 p-6 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow flex flex-col justify-center items-center min-h-[160px]">
+          <div className="text-4xl font-bold text-orange-700 mb-2">{caregiverCount}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">My Care Team</div>
           <div className="text-sm text-gray-700">Family and helpers</div>
         </div>
-        <div className="bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-400 p-4 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow">
-          <div className="text-3xl font-bold text-purple-700 mb-2">{upcomingTasks}</div>
+        <div className="bg-gradient-to-br from-purple-100 to-purple-200 border-2 border-purple-400 p-6 text-center shadow-md rounded-xl hover:shadow-lg transition-shadow flex flex-col justify-center items-center min-h-[160px]">
+          <div className="text-4xl font-bold text-purple-700 mb-2">{upcomingTasks}</div>
           <div className="text-base text-gray-900 font-semibold mb-1">Upcoming Tasks</div>
           <div className="text-sm text-gray-700">Next 7 days</div>
         </div>
@@ -188,18 +188,18 @@ export default function Home() {
               .map((feature) => {
                 const Icon = feature.icon
                 return (
-                  <div key={feature.title} className="relative">
+                  <div key={feature.title} className="relative flex">
                     <Link
                       href={feature.href}
-                      className={`bg-gradient-to-br ${feature.bgGradient} border-2 ${feature.borderColor} p-6 shadow-md block min-h-[180px] hover:shadow-lg rounded-xl transition-all hover:scale-105`}
+                      className={`bg-gradient-to-br ${feature.bgGradient} border-2 ${feature.borderColor} p-6 shadow-md block min-h-[200px] w-full hover:shadow-lg rounded-xl transition-all hover:scale-105 flex flex-col`}
                     >
-                      <div className={`w-16 h-16 ${feature.iconBg} border-2 ${feature.borderColor} flex items-center justify-center mb-4 rounded-lg`}>
+                      <div className={`w-16 h-16 ${feature.iconBg} border-2 ${feature.borderColor} flex items-center justify-center mb-4 rounded-lg flex-shrink-0`}>
                         <Icon className={feature.iconColor} size={28} />
                       </div>
-                      <h3 className="text-xl font-bold text-gray-900 mb-3">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 flex-shrink-0">
                         {feature.title}
                       </h3>
-                      <p className="text-base text-gray-800 leading-relaxed">{feature.description}</p>
+                      <p className="text-base text-gray-800 leading-relaxed flex-grow">{feature.description}</p>
                     </Link>
                     <button
                       onClick={(e) => {
@@ -207,7 +207,7 @@ export default function Home() {
                         e.stopPropagation()
                         toggleFavorite(feature.href)
                       }}
-                      className="absolute top-4 right-4 p-2 bg-yellow-400 text-white rounded-full hover:bg-yellow-500 min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 border-yellow-600 shadow-md"
+                      className="absolute top-4 right-4 p-2 bg-yellow-400 text-white rounded-full hover:bg-yellow-500 min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 border-yellow-600 shadow-md z-10"
                       aria-label="Remove from favorites"
                     >
                       <Star size={20} className="fill-white" />
@@ -228,18 +228,18 @@ export default function Home() {
             const Icon = feature.icon
             const favorite = isFavorite(feature.href)
             return (
-              <div key={feature.title} className="relative">
+              <div key={feature.title} className="relative flex">
                 <Link
                   href={feature.href}
-                  className={`bg-gradient-to-br ${feature.bgGradient} border-2 ${feature.borderColor} p-6 shadow-md block min-h-[180px] hover:shadow-lg rounded-xl transition-all hover:scale-105`}
+                  className={`bg-gradient-to-br ${feature.bgGradient} border-2 ${feature.borderColor} p-6 shadow-md block min-h-[200px] w-full hover:shadow-lg rounded-xl transition-all hover:scale-105 flex flex-col`}
                 >
-                  <div className={`w-16 h-16 ${feature.iconBg} border-2 ${feature.borderColor} flex items-center justify-center mb-4 rounded-lg`}>
+                  <div className={`w-16 h-16 ${feature.iconBg} border-2 ${feature.borderColor} flex items-center justify-center mb-4 rounded-lg flex-shrink-0`}>
                     <Icon className={feature.iconColor} size={28} />
                   </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">
+                  <h3 className="text-xl font-bold text-gray-900 mb-3 flex-shrink-0">
                     {feature.title}
                   </h3>
-                  <p className="text-base text-gray-800 leading-relaxed">{feature.description}</p>
+                  <p className="text-base text-gray-800 leading-relaxed flex-grow">{feature.description}</p>
                 </Link>
                 <button
                   onClick={(e) => {
@@ -250,7 +250,7 @@ export default function Home() {
                     e.stopPropagation()
                     toggleFavorite(feature.href)
                   }}
-                  className={`absolute top-4 right-4 p-2 rounded-full min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 shadow-md ${
+                  className={`absolute top-4 right-4 p-2 rounded-full min-w-[3rem] min-h-[3rem] flex items-center justify-center border-2 shadow-md z-10 ${
                     favorite
                       ? 'bg-yellow-400 text-white border-yellow-600 hover:bg-yellow-500'
                       : 'bg-white text-gray-600 border-gray-400 hover:bg-gray-100 hover:border-yellow-400'

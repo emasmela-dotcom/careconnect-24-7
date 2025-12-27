@@ -47,3 +47,5 @@ echo "4. Run: npm run dev"
 echo ""
 echo "✨ Setup complete! Your .env.local file is ready."
 
+
+

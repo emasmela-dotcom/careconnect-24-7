@@ -1,15 +1,48 @@
 'use client'
 
 import Link from 'next/link'
-import { Plus, Calendar, Clock, MapPin, FileText, CheckCircle2 } from 'lucide-react'
+import { Plus, Calendar, Clock, MapPin, FileText, CheckCircle2, Download, ExternalLink } from 'lucide-react'
 import { format } from 'date-fns'
 import { useData } from '@/components/DataContextAPI'
+import { downloadICS, generateGoogleCalendarUrl, type CalendarEvent } from '@/lib/calendar-export'
 
 export default function AppointmentsPage() {
   const { appointments } = useData()
   const today = new Date()
   const upcoming = appointments.filter(apt => new Date(apt.date) >= today)
   const past = appointments.filter(apt => new Date(apt.date) < today)
+  
+  const handleExportCalendar = () => {
+    const events: CalendarEvent[] = upcoming.map(apt => {
+      const [hours, minutes] = apt.time.split(':').map(Number)
+      const startDate = new Date(apt.date)
+      startDate.setHours(hours, minutes, 0, 0)
+      
+      return {
+        title: `${apt.type} - ${apt.doctorName}`,
+        description: `Appointment for ${apt.residentName}${apt.notes ? `\n\nNotes: ${apt.notes}` : ''}`,
+        startDate,
+        location: apt.location || apt.address || undefined,
+      }
+    })
+    
+    downloadICS(events, 'careconnect-appointments.ics')
+  }
+  
+  const handleAddToGoogleCalendar = (apt: typeof upcoming[0]) => {
+    const [hours, minutes] = apt.time.split(':').map(Number)
+    const startDate = new Date(apt.date)
+    startDate.setHours(hours, minutes, 0, 0)
+    
+    const event: CalendarEvent = {
+      title: `${apt.type} - ${apt.doctorName}`,
+      description: `Appointment for ${apt.residentName}${apt.notes ? `\n\nNotes: ${apt.notes}` : ''}`,
+      startDate,
+      location: apt.location || apt.address || undefined,
+    }
+    
+    window.open(generateGoogleCalendarUrl(event), '_blank')
+  }
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -18,13 +51,24 @@ export default function AppointmentsPage() {
           <h1 className="text-3xl font-bold text-gray-900">Appointment Management</h1>
           <p className="text-gray-600 mt-1">Manage doctor visits with prep checklists and reminders</p>
         </div>
-        <Link
-          href="/appointments/new"
-          className="flex items-center px-4 py-2 bg-blue-600 text-white border border-blue-700 hover:bg-blue-700 transition-colors"
-        >
-          <Plus size={20} className="mr-2" />
-          Schedule Appointment
-        </Link>
+        <div className="flex gap-2">
+          {upcoming.length > 0 && (
+            <button
+              onClick={handleExportCalendar}
+              className="flex items-center px-4 py-2 bg-green-600 text-white border border-green-700 hover:bg-green-700 transition-colors"
+            >
+              <Download size={20} className="mr-2" />
+              Export Calendar
+            </button>
+          )}
+          <Link
+            href="/appointments/new"
+            className="flex items-center px-4 py-2 bg-blue-600 text-white border border-blue-700 hover:bg-blue-700 transition-colors"
+          >
+            <Plus size={20} className="mr-2" />
+            Schedule Appointment
+          </Link>
+        </div>
       </div>
 
       {appointments.length === 0 ? (
@@ -104,10 +148,18 @@ export default function AppointmentsPage() {
                           </div>
                         )}
                       </div>
-                      <div className="flex gap-2 ml-4">
+                      <div className="flex flex-col gap-2 ml-4">
+                        <button
+                          onClick={() => handleAddToGoogleCalendar(apt)}
+                          className="px-3 py-2 text-sm bg-blue-50 text-blue-700 border border-blue-300 hover:bg-blue-100 flex items-center justify-center"
+                          title="Add to Google Calendar"
+                        >
+                          <ExternalLink size={16} className="mr-1" />
+                          Add to Calendar
+                        </button>
                         <Link
                           href={`/appointments/${apt.id}/edit`}
-                          className="px-3 py-1 text-sm border border-gray-300 text-gray-700 hover:bg-gray-50"
+                          className="px-3 py-2 text-sm border border-gray-300 text-gray-700 hover:bg-gray-50 text-center"
                         >
                           Edit
                         </Link>

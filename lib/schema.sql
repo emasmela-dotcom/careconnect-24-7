@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS users (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   email VARCHAR(255) UNIQUE NOT NULL,
   name VARCHAR(255),
+  password_hash TEXT,
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
@@ -122,6 +123,19 @@ CREATE TABLE IF NOT EXISTS completed_reminders (
   UNIQUE(user_id, reminder_id)
 );
 
+-- Documents (Medical Records, Prescriptions, etc.)
+CREATE TABLE IF NOT EXISTS documents (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  name VARCHAR(255) NOT NULL,
+  type VARCHAR(100) NOT NULL,
+  url TEXT NOT NULL,
+  size INTEGER,
+  category VARCHAR(50) CHECK (category IN ('prescription', 'lab-result', 'insurance', 'medical-record', 'other')),
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
 -- Create indexes for better query performance
 CREATE INDEX IF NOT EXISTS idx_residents_user_id ON residents(user_id);
 CREATE INDEX IF NOT EXISTS idx_caregivers_user_id ON caregivers(user_id);
@@ -137,4 +151,20 @@ CREATE INDEX IF NOT EXISTS idx_symptoms_user_id ON symptoms(user_id);
 CREATE INDEX IF NOT EXISTS idx_symptoms_resident_id ON symptoms(resident_id);
 CREATE INDEX IF NOT EXISTS idx_symptoms_date ON symptoms(date);
 CREATE INDEX IF NOT EXISTS idx_completed_reminders_user_id ON completed_reminders(user_id);
+CREATE INDEX IF NOT EXISTS idx_documents_user_id ON documents(user_id);
+
+-- Password Reset Tokens
+CREATE TABLE IF NOT EXISTS password_reset_tokens (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+  token VARCHAR(255) UNIQUE NOT NULL,
+  expires_at TIMESTAMP NOT NULL,
+  used BOOLEAN DEFAULT FALSE,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_user_id ON password_reset_tokens(user_id);
+CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_token ON password_reset_tokens(token);
+CREATE INDEX IF NOT EXISTS idx_password_reset_tokens_expires_at ON password_reset_tokens(expires_at);
+
 

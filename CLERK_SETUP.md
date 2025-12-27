@@ -145,3 +145,5 @@ DATABASE_URL=your-production-neon-url
 
 *Once you add the Clerk keys to `.env.local`, authentication will be fully functional!*
 
+
+

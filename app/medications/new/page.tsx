@@ -1,14 +1,21 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useData } from '@/components/DataContextAPI'
-import { Save, X, Plus as PlusIcon } from 'lucide-react'
+import { Save, X, Plus as PlusIcon, AlertTriangle, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+
+interface DrugInteraction {
+  severity: 'mild' | 'moderate' | 'severe' | 'contraindicated'
+  description: string
+  medications: string[]
+  recommendation: string
+}
 
 export default function NewMedicationPage() {
   const router = useRouter()
-  const { residents, addMedication } = useData()
+  const { residents, addMedication, medications } = useData()
   
   const [formData, setFormData] = useState({
     name: '',
@@ -22,15 +29,80 @@ export default function NewMedicationPage() {
   })
   
   const [newTime, setNewTime] = useState('')
+  const [interactions, setInteractions] = useState<{
+    drugInteractions: DrugInteraction[]
+    foodInteractions: DrugInteraction[]
+    hasInteractions: boolean
+  } | null>(null)
+  const [checkingInteractions, setCheckingInteractions] = useState(false)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    
+    // Warn if there are severe interactions
+    if (interactions?.drugInteractions.some(i => i.severity === 'severe' || i.severity === 'contraindicated')) {
+      const confirmed = window.confirm(
+        '⚠️ WARNING: This medication has severe interactions with your existing medications. ' +
+        'Are you sure you want to add it? Please consult your doctor first.'
+      )
+      if (!confirmed) return
+    }
+    
     const resident = residents.find(r => r.id === formData.residentId)
-    addMedication({
+    await addMedication({
       ...formData,
       residentName: resident?.name || 'Unknown',
     })
     router.push('/medications')
+  }
+  
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case 'severe':
+      case 'contraindicated':
+        return 'bg-red-100 border-red-500 text-red-800'
+      case 'moderate':
+        return 'bg-yellow-100 border-yellow-500 text-yellow-800'
+      case 'mild':
+        return 'bg-blue-100 border-blue-500 text-blue-800'
+      default:
+        return 'bg-gray-100 border-gray-500 text-gray-800'
+    }
+  }
+  
+  const getSeverityIcon = (severity: string) => {
+    if (severity === 'severe' || severity === 'contraindicated') {
+      return <AlertTriangle className="text-red-600" size={24} />
+    }
+    return <AlertTriangle className="text-yellow-600" size={24} />
+  }
+
+  // Check for drug interactions when medication name changes
+  useEffect(() => {
+    if (formData.name.trim().length > 2) {
+      checkInteractions()
+    } else {
+      setInteractions(null)
+    }
+  }, [formData.name])
+
+  const checkInteractions = async () => {
+    if (!formData.name.trim()) return
+    
+    setCheckingInteractions(true)
+    try {
+      const response = await fetch('/api/drug-interactions', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ medicationName: formData.name }),
+      })
+      const data = await response.json()
+      setInteractions(data)
+    } catch (error) {
+      console.error('Error checking interactions:', error)
+    } finally {
+      setCheckingInteractions(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -81,7 +153,60 @@ export default function NewMedicationPage() {
               className="w-full px-4 py-3 text-lg border-4 border-gray-300 rounded-xl focus:ring-4 focus:ring-purple-200 focus:border-purple-500"
               placeholder="e.g., Aspirin, Metformin"
             />
+            {checkingInteractions && (
+              <p className="text-sm text-gray-600 mt-2">Checking for interactions...</p>
+            )}
           </div>
+          
+          {/* Drug Interaction Warnings */}
+          {interactions && interactions.hasInteractions && (
+            <div className="space-y-4">
+              {interactions.drugInteractions.length > 0 && (
+                <div className="border-4 border-red-300 bg-red-50 p-4 rounded-xl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <AlertTriangle className="text-red-600" size={24} />
+                    <h3 className="text-lg font-bold text-red-800">⚠️ Drug Interaction Warning</h3>
+                  </div>
+                  {interactions.drugInteractions.map((interaction, idx) => (
+                    <div key={idx} className={`mb-3 p-3 rounded-lg border-2 ${getSeverityColor(interaction.severity)}`}>
+                      <div className="flex items-start gap-2 mb-2">
+                        {getSeverityIcon(interaction.severity)}
+                        <div className="flex-1">
+                          <p className="font-semibold mb-1">
+                            {interaction.medications.join(' + ')}
+                          </p>
+                          <p className="text-sm mb-2">{interaction.description}</p>
+                          <p className="text-sm font-medium">{interaction.recommendation}</p>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              
+              {interactions.foodInteractions.length > 0 && (
+                <div className="border-4 border-yellow-300 bg-yellow-50 p-4 rounded-xl">
+                  <div className="flex items-center gap-2 mb-3">
+                    <AlertTriangle className="text-yellow-600" size={24} />
+                    <h3 className="text-lg font-bold text-yellow-800">🍽️ Food Interaction Warning</h3>
+                  </div>
+                  {interactions.foodInteractions.map((interaction, idx) => (
+                    <div key={idx} className="mb-2 p-3 rounded-lg border-2 border-yellow-400 bg-yellow-100">
+                      <p className="font-semibold mb-1">{interaction.description}</p>
+                      <p className="text-sm">{interaction.recommendation}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
+          
+          {interactions && !interactions.hasInteractions && formData.name.trim().length > 2 && (
+            <div className="border-4 border-green-300 bg-green-50 p-4 rounded-xl flex items-center gap-2">
+              <CheckCircle className="text-green-600" size={24} />
+              <p className="text-green-800 font-semibold">✓ No known interactions detected</p>
+            </div>
+          )}
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>

@@ -51,3 +51,5 @@ console.log('1. Make sure .env.local has your Neon connection string')
 console.log('2. Run: npx tsx scripts/test-neon-connection.ts')
 console.log('3. If tables are missing, run lib/schema.sql in Neon SQL Editor')
 
+
+

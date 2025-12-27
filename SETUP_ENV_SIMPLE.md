@@ -51,3 +51,5 @@ npx tsx scripts/test-neon-connection.ts
 
 **The easiest way is using a text editor!** Just create `.env.local` and paste your connection string.
 
+
+
